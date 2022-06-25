@@ -1,0 +1,17 @@
+mat-sidenav-container,
+mat-sidenav-content,
+mat-sidenav {
+  height: 100vh;
+}
+mat-sidenav {
+  width: 70vw;
+}
+.header {
+  margin-bottom: 8px;
+}
+.container {
+  height: 100vh;
+  overflow: auto;
+  padding: 10px;
+  margin-bottom: 50px;
+}
