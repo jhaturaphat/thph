@@ -14,6 +14,8 @@ import {MatSidenavModule} from '@angular/material/sidenav';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatButtonModule } from '@angular/material/button';
 import { MatListModule } from '@angular/material/list';
+import {MatFormFieldModule, MAT_FORM_FIELD_DEFAULT_OPTIONS} from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 
 // Components
 import { ContentComponent } from '../layout/content/content.component';
@@ -36,7 +38,9 @@ import { SideBarComponent } from '../layout/side-bar/side-bar.component';
         MatSidenavModule,
         MatMenuModule,
         MatButtonModule,
-        MatListModule,
+        MatListModule,       
+        MatFormFieldModule,
+        MatInputModule
     ],
     exports: [
         RouterModule,
@@ -49,13 +53,15 @@ import { SideBarComponent } from '../layout/side-bar/side-bar.component';
         MatMenuModule,
         MatButtonModule,
         MatListModule,
+        MatFormFieldModule,
+        MatInputModule,
         // component file
         ContentComponent,
         FooterMenuComponent,
-        SideBarComponent
+        SideBarComponent  
     ],
     providers: [
-
+        {provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: {appearance: 'fill'}}
     ]
 })
 
