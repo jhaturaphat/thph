@@ -2,8 +2,9 @@ const connection = require('../configs/databases');
 
 
 module.exports = {
-    onReserve(value){
-        return new Promise((resolve, reject)=>{            
+    onReserve(value){        
+        return new Promise((resolve, reject)=>{ 
+            // resolve(value);           
             connection.query(`INSERT INTO gvmcar_rsv (
                 gvmcar_rsv_num_of_ple,
                 gvmcar_rsv_trip_job,

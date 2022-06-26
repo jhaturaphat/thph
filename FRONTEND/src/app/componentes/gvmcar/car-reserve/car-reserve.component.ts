@@ -1,3 +1,4 @@
+import { GvmcarService } from './../../../services/gvmcar.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
@@ -8,7 +9,10 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class CarReserveComponent implements OnInit {
 
-  constructor(private fb:FormBuilder) { 
+  constructor(
+    private fb:FormBuilder,
+    private GvmcarService:GvmcarService
+    ) { 
     this.myForm = this.fb.group({
       gvmcar_rsv_num_of_ple:['', Validators.required],
       gvmcar_rsv_trip_job:['', Validators.required],
@@ -24,7 +28,8 @@ export class CarReserveComponent implements OnInit {
   }
 
   gvmSave():void {
-    console.log(this.myForm.value);    
+    console.log(this.myForm.value);  
+    this.GvmcarService.save(this.myForm.value);
   }
 
 }
