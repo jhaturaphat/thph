@@ -6,12 +6,4 @@ mat-sidenav {
 mat-sidenav {
   width: 70vw;
 }
-.header {
-  margin-bottom: 8px;
-}
-.container {
-  height: 100vh;
-  overflow: auto;
-  padding: 10px;
-  margin-bottom: 50px;
-}
+
