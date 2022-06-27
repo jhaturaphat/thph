@@ -1,6 +1,6 @@
 // https://dev-reboot.com/pwa-navigation/
 
-import { NgModule } from '@angular/core';
+import { LOCALE_ID, NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
@@ -81,7 +81,7 @@ import { SideBarComponent } from '../layout/side-bar/side-bar.component';
     ],
     providers: [
         {provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: {appearance: 'fill'}},
-        MatDatepickerModule
+        { provide: LOCALE_ID, useValue: "th-TH" } //เพิ่ม LOCATE_ID เข้าไปครับ
     ]
 })
 

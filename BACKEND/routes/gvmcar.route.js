@@ -1,6 +1,6 @@
 const route = require('express').Router();
 const {check} = require('express-validator');
-const {onReserve} = require('../services/gvmcar.service');
+const {onRevSave} = require('../services/gvmcar.service');
 
 
 route.post('/reserve',[
@@ -12,7 +12,7 @@ route.post('/reserve',[
 ], async (req, res)=>{
     try {
         req.validate();
-        res.json(await onReserve(req.body));
+        res.json(await onRevSave(req.body));
     } catch (ex) {
         res.error(ex);
     }    

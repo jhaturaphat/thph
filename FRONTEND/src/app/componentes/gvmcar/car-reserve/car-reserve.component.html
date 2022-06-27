@@ -23,17 +23,26 @@
                 <mat-icon matSuffix>description </mat-icon>                
             </mat-form-field>
             <mat-form-field appearance="legacy">
+                <mat-label>วันที่ เริ่ม-สิ้นสุด</mat-label>
+                <mat-date-range-input [rangePicker]="picker">
+                  <input matStartDate placeholder="Start date" readonly formControlName="gvmcar_rsv_start_date">
+                  <input matEndDate placeholder="End date" readonly formControlName="gvmcar_rsv_end_date">
+                </mat-date-range-input>                
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-date-range-picker #picker></mat-date-range-picker>
+            </mat-form-field>
+            <!-- <mat-form-field appearance="legacy">
                 <mat-label>วันที่เริ่ม</mat-label>
-                <input matInput [matDatepicker]="startdate" placeholder="วันที่เริ่ม" formControlName="gvmcar_rsv_start_date">
+                <input matInput [matDatepicker]="startdate" placeholder="วันที่เริ่ม" readonly formControlName="gvmcar_rsv_start_date">
                 <mat-datepicker-toggle matSuffix [for]="startdate"></mat-datepicker-toggle>
                 <mat-datepicker #startdate></mat-datepicker>
             </mat-form-field>
             <mat-form-field appearance="legacy">
                 <mat-label>วันที่สิ้นสุด</mat-label>
-                <input matInput [matDatepicker]="enddate" placeholder="วันที่สิ้นสุด" formControlName="gvmcar_rsv_end_date">
+                <input matInput [matDatepicker]="enddate" placeholder="วันที่สิ้นสุด" readonly formControlName="gvmcar_rsv_end_date">
                 <mat-datepicker-toggle matSuffix [for]="enddate"></mat-datepicker-toggle>
                 <mat-datepicker #enddate></mat-datepicker>
-            </mat-form-field>
+            </mat-form-field> -->
         </form>
         </mat-card-content>
         <mat-card-actions>

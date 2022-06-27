@@ -11,15 +11,10 @@ export class GvmcarService {
 
   constructor(private http:HttpClient) { }
 
-  url = environment.url + '/gvmcar';
+  apiURL = environment.url + '/gvmcar';
 
   save(body:any){    
-    this.http.get(this.url + '/reserve', {withCredentials: true })
-    .subscribe((resp: any) => { return resp;}, 
-    (errorResp) => {
-      console.log( errorResp);
-      
-    })
+    return lastValueFrom(this.http.post(this.apiURL+'/reserve', body)) as Promise<any>    
   }
 
 }

@@ -12,7 +12,8 @@ export class CarReserveComponent implements OnInit {
   constructor(
     private fb:FormBuilder,
     private GvmcarService:GvmcarService
-    ) { 
+    ) {
+
     this.myForm = this.fb.group({
       gvmcar_rsv_num_of_ple:['', Validators.required],
       gvmcar_rsv_trip_job:['', Validators.required],
@@ -29,7 +30,9 @@ export class CarReserveComponent implements OnInit {
 
   gvmSave():void {
     console.log(this.myForm.value);  
-    this.GvmcarService.save(this.myForm.value);
+    this.GvmcarService.save(this.myForm.value).then(result=>{
+      console.log(result);      
+    }).catch(err=>console.log(err));
   }
 
 }
