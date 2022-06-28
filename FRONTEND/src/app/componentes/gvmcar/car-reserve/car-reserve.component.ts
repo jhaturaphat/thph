@@ -34,9 +34,10 @@ export class CarReserveComponent implements OnInit {
 
   ngOnInit(): void {
     this.GvmcarService.findAll().then(result=>{
-      console.log(result);
-      
-      this.gvmCarRsv = result; 
+      console.log(result);      
+      this.gvmCarRsv = result;  
+      console.log(this.dateToThai(this.gvmCarRsv[0].gvmcar_rsv_end_date));
+           
     }).catch(err=>{
       this.alert.openSnackBar(err.message);
       console.log(err);
@@ -58,6 +59,15 @@ export class CarReserveComponent implements OnInit {
 
   tranFromDate(date:Date):string{
     return new Date(date).toISOString().slice(0, 10).toString();
+  }
+
+  dateToThai(date:any){
+    return new Date(date).toLocaleDateString('th-TH', {
+      year: '2-digit',
+      month: 'short',
+      day: 'numeric',
+      weekday: 'short',
+    })
   }
 
 }

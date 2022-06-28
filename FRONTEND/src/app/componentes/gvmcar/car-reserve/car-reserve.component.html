@@ -53,7 +53,8 @@
                             {{item.gvmcar_rsv_trip_job}}
                         </mat-panel-title>
                         <mat-panel-description>
-                            {{item.gvmcar_rsv_start_date }}
+                            {{dateToThai(item.gvmcar_rsv_start_date)}} - 
+                            {{dateToThai(item.gvmcar_rsv_end_date)}}
                         </mat-panel-description>
                     </mat-expansion-panel-header>
                     <p>{{item.gvmcar_rsv_trip_detail}}</p>
