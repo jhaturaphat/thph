@@ -23,6 +23,8 @@ import {MatCardModule} from '@angular/material/card';
 import {MatDividerModule} from '@angular/material/divider';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
+import {MatExpansionModule} from '@angular/material/expansion';
 // Components
 import { ContentComponent } from '../layout/content/content.component';
 import { FooterMenuComponent } from '../layout/footer-menu/footer-menu.component';
@@ -52,6 +54,8 @@ import { SideBarComponent } from '../layout/side-bar/side-bar.component';
         MatDividerModule,
         MatDatepickerModule,
         MatNativeDateModule,
+        MatSnackBarModule,
+        MatExpansionModule,
         // Module Angular
         ReactiveFormsModule
     ],
@@ -72,6 +76,8 @@ import { SideBarComponent } from '../layout/side-bar/side-bar.component';
         MatDividerModule,
         MatDatepickerModule,
         MatNativeDateModule,
+        MatSnackBarModule,
+        MatExpansionModule,
         // Module Angular
         ReactiveFormsModule,
         // component file

@@ -1,6 +1,8 @@
 import { GvmcarService } from './../../../services/gvmcar.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AlertService } from 'src/app/shared/services/alert.service';
+import { IGvmCarRsv } from '../gvmcar.interface';
 
 @Component({
   selector: 'app-car-reserve',
@@ -9,9 +11,14 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class CarReserveComponent implements OnInit {
 
+  myForm:FormGroup;
+  panelOpenState:boolean = false;
+  gvmCarRsv:IGvmCarRsv[] = [];
+
   constructor(
     private fb:FormBuilder,
-    private GvmcarService:GvmcarService
+    private GvmcarService:GvmcarService,
+    private alert:AlertService
     ) {
 
     this.myForm = this.fb.group({
@@ -23,16 +30,34 @@ export class CarReserveComponent implements OnInit {
     });
   }
 
-  myForm:FormGroup
+  
 
   ngOnInit(): void {
+    this.GvmcarService.findAll().then(result=>{
+      console.log(result);
+      
+      this.gvmCarRsv = result; 
+    }).catch(err=>{
+      this.alert.openSnackBar(err.message);
+      console.log(err);
+    })
   }
 
   gvmSave():void {
-    console.log(this.myForm.value);  
-    this.GvmcarService.save(this.myForm.value).then(result=>{
-      console.log(result);      
-    }).catch(err=>console.log(err));
+    if(!this.myForm.valid) return;    
+    let valueF = this.myForm.value;
+    this.myForm.value['gvmcar_rsv_start_date'] = this.tranFromDate(this.myForm.value['gvmcar_rsv_start_date']);
+    this.myForm.value['gvmcar_rsv_end_date'] = this.tranFromDate(this.myForm.value['gvmcar_rsv_end_date']);
+    this.GvmcarService.save(valueF).then(result=>{
+      this.alert.openSnackBar("บันทึกสำเร็จ"); 
+    }).catch(err=>{
+      this.alert.openSnackBar(err.message);
+      console.log(err);
+    });
+  }
+
+  tranFromDate(date:Date):string{
+    return new Date(date).toISOString().slice(0, 10).toString();
   }
 
 }

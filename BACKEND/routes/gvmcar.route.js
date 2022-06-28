@@ -1,6 +1,6 @@
 const route = require('express').Router();
 const {check} = require('express-validator');
-const {onRevSave} = require('../services/gvmcar.service');
+const {onRevSave, onFindAll} = require('../services/gvmcar.service');
 
 
 route.post('/reserve',[
@@ -13,9 +13,19 @@ route.post('/reserve',[
     try {
         req.validate();
         res.json(await onRevSave(req.body));
-    } catch (ex) {
+    } catch (ex) {      
+        console.log({Error:ex.sqlMessage});  
         res.error(ex);
     }    
+})
+
+route.get('/findall',async(req, res)=>{
+    try {
+        res.json(await onFindAll());
+    } catch (error) {
+        console.log({Error:ex.sqlMessage});  
+        res.error(ex);
+    }
 })
 
 module.exports = route;

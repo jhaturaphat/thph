@@ -3,8 +3,12 @@
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
-.example-card{
-    margin: 10px;
+mat-card, mat-expansion-panel{
+    margin: 8px !important;
+}
+.mat-expansion-panel{
+    margin-right: 8px !important;
+    margin-left: 8px !important;
 }
 
 
