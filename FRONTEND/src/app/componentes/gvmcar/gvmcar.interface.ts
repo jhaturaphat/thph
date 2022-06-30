@@ -47,10 +47,25 @@ export interface IGvmCarRsv{
     gvmcar_rsv_end_date:Date,
     gvmcar_rsv_create_at?:Date,
     gvmcar_rsv_update_at?:Date,
-    gvmcar_id?:string,    
-    gvmcar_emp_driver_fullname?: string,
-    gvmcar_emp_driver_id?: number,
-    gvmcar_emp_driver_nickname?: string,
-    gvmcar_emp_driving_pic?: string,
-    gvmcar_emp_driving_mobile?:string
+    gvmcar_id?:string, //ตาราง gvmcar       
+    user_register_id?:string,
+    user_register_emp_driving?:string
+    // 
+    line_liff_line_user_id?:string,
+    user_name?:string,
+    fullname?:string,
+    email?:string,
+    image?:string,
+    mobile?:string,
+    status?:string
+}
+
+export interface IUserRegister{
+    line_liff_line_user_id:string,
+    user_name:string,
+    fullname:string,
+    email:string,
+    image:string,
+    mobile:string,
+    status:string
 }

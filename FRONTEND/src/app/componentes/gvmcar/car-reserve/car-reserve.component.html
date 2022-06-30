@@ -49,7 +49,7 @@
                 (opened)="panelOpenState = true" 
                 (closed)="panelOpenState = false">                
                     <mat-expansion-panel-header >
-                        <mat-panel-title [ngClass]="item.gvmcar_emp_driver_id ? 'green' : 'red'">                            
+                        <mat-panel-title [ngClass]="item.user_register_emp_driving ? 'green' : 'red'">                            
                             {{item.gvmcar_rsv_trip_job}}                            
                         </mat-panel-title>
                         <mat-panel-description>
@@ -61,10 +61,11 @@
                         {{item.gvmcar_rsv_trip_detail}}
                     </mat-card-subtitle>                    
                     <mat-divider></mat-divider>
-                    <button *ngIf="item.gvmcar_emp_driver_id" mat-button color="primary">{{item.gvmcar_emp_driver_fullname}}</button>
+                    <button *ngIf="item.user_register_emp_driving" mat-button color="primary"><mat-icon>local_taxi</mat-icon> {{item.fullname}}</button>
+                    <button *ngIf="item.user_register_emp_driving" mat-button color="primary"><mat-icon>list_alt</mat-icon> รายละเอียด</button>
                 </mat-expansion-panel>
                 
-            </mat-accordion>
-        
-    
+            </mat-accordion>    
+
+            
 </app-content>

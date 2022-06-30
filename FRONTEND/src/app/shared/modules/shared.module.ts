@@ -27,17 +27,22 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {MatBadgeModule} from '@angular/material/badge';
 import {MatGridListModule} from '@angular/material/grid-list';
+import {MatDialogModule} from '@angular/material/dialog';
+
 // Components
 import { ContentComponent } from '../layout/content/content.component';
 import { FooterMenuComponent } from '../layout/footer-menu/footer-menu.component';
 import { SideBarComponent } from '../layout/side-bar/side-bar.component';
-
+import { DashboardComponent } from 'src/app/componentes/dashboard/dashboard.component';
+import { CarreservDetailComponent } from 'src/app/componentes/gvmcar/carreserv-detail/carreserv-detail.component';
 
 @NgModule({
     declarations: [
         ContentComponent,
         FooterMenuComponent,
-        SideBarComponent
+        SideBarComponent,
+        DashboardComponent,
+        CarreservDetailComponent
     ],
     imports: [
         RouterModule,
@@ -60,6 +65,7 @@ import { SideBarComponent } from '../layout/side-bar/side-bar.component';
         MatExpansionModule,
         MatBadgeModule,
         MatGridListModule,
+        MatDialogModule,
         // Module Angular
         ReactiveFormsModule
     ],
@@ -84,12 +90,15 @@ import { SideBarComponent } from '../layout/side-bar/side-bar.component';
         MatExpansionModule,
         MatBadgeModule,
         MatGridListModule,
+        MatDialogModule,
+        CarreservDetailComponent,
         // Module Angular
         ReactiveFormsModule,
         // component file
         ContentComponent,
         FooterMenuComponent,
-        SideBarComponent  
+        SideBarComponent,
+        DashboardComponent,
     ],
     providers: [
         {provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: {appearance: 'fill'}},
