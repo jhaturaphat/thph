@@ -6,6 +6,6 @@ Mobile menu
         <img src="images/Screenshot_1.png" width="400" class="img-responsive" alt="">
     </div>
     <div style="width:30%">
-        <img src="images/Screenshot_1.png" width="400" class="img-responsive" alt="">
+        <img src="images/Screenshot_2.png" width="400" class="img-responsive" alt="">
     </div>
 </div>
