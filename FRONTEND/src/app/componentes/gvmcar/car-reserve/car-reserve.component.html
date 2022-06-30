@@ -47,18 +47,23 @@
             <mat-accordion>
                 <mat-expansion-panel *ngFor="let item of gvmCarRsv"
                 (opened)="panelOpenState = true" 
-                (closed)="panelOpenState = false">
-                    <mat-expansion-panel-header>
-                        <mat-panel-title>
-                            {{item.gvmcar_rsv_trip_job}}
+                (closed)="panelOpenState = false">                
+                    <mat-expansion-panel-header >
+                        <mat-panel-title [ngClass]="item.gvmcar_emp_driver_id ? 'green' : 'red'">                            
+                            {{item.gvmcar_rsv_trip_job}}                            
                         </mat-panel-title>
                         <mat-panel-description>
                             {{dateToThai(item.gvmcar_rsv_start_date)}} - 
                             {{dateToThai(item.gvmcar_rsv_end_date)}}
                         </mat-panel-description>
                     </mat-expansion-panel-header>
-                    <p>{{item.gvmcar_rsv_trip_detail}}</p>
+                    <mat-card-subtitle>
+                        {{item.gvmcar_rsv_trip_detail}}
+                    </mat-card-subtitle>                    
+                    <mat-divider></mat-divider>
+                    <button *ngIf="item.gvmcar_emp_driver_id" mat-button color="primary">{{item.gvmcar_emp_driver_fullname}}</button>
                 </mat-expansion-panel>
+                
             </mat-accordion>
         
     

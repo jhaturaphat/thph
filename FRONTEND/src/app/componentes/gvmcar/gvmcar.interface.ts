@@ -47,6 +47,10 @@ export interface IGvmCarRsv{
     gvmcar_rsv_end_date:Date,
     gvmcar_rsv_create_at?:Date,
     gvmcar_rsv_update_at?:Date,
-    gvmcar_id:string,
-    gvmcar_emp_driver_id:number
+    gvmcar_id?:string,    
+    gvmcar_emp_driver_fullname?: string,
+    gvmcar_emp_driver_id?: number,
+    gvmcar_emp_driver_nickname?: string,
+    gvmcar_emp_driving_pic?: string,
+    gvmcar_emp_driving_mobile?:string
 }

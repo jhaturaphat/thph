@@ -14,6 +14,7 @@ export class CarReserveComponent implements OnInit {
   myForm:FormGroup;
   panelOpenState:boolean = false;
   gvmCarRsv:IGvmCarRsv[] = [];
+  hidden = false;
 
   constructor(
     private fb:FormBuilder,
@@ -36,8 +37,6 @@ export class CarReserveComponent implements OnInit {
     this.GvmcarService.findAll().then(result=>{
       console.log(result);      
       this.gvmCarRsv = result;  
-      console.log(this.dateToThai(this.gvmCarRsv[0].gvmcar_rsv_end_date));
-           
     }).catch(err=>{
       this.alert.openSnackBar(err.message);
       console.log(err);
@@ -45,7 +44,7 @@ export class CarReserveComponent implements OnInit {
   }
 
   gvmSave():void {
-    if(!this.myForm.valid) return;    
+    if(!this.myForm.valid) this.alert.openSnackBar('กรุณากรองข้อมูล');    
     let valueF = this.myForm.value;
     this.myForm.value['gvmcar_rsv_start_date'] = this.tranFromDate(this.myForm.value['gvmcar_rsv_start_date']);
     this.myForm.value['gvmcar_rsv_end_date'] = this.tranFromDate(this.myForm.value['gvmcar_rsv_end_date']);

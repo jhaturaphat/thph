@@ -1,5 +1,13 @@
 /* You can add global styles to this file, and also import other style files */
 
+.green{
+    color: #0D904F !important;
+    font-weight: 600;    
+}
+.red{
+    color: #F44336 !important;
+}
+
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
@@ -10,6 +18,11 @@ mat-card, mat-expansion-panel{
     margin-right: 8px !important;
     margin-left: 8px !important;
 }
-
+.mat-badge-content, .mat-badge-active {
+    width: 40px;
+    height: 40px; 
+    line-height: 40px;
+    z-index: 9000 !important;
+}
 
   

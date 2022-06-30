@@ -12,7 +12,7 @@ export class AlertService {
 
   constructor(private snackBar: MatSnackBar) { }
 
-  openSnackBar(text:string) {
+  openSnackBar(text:string):any {
     return this.snackBar.open(text, 'X', {
       horizontalPosition: "center",
       verticalPosition: "top",

@@ -25,6 +25,8 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatExpansionModule} from '@angular/material/expansion';
+import {MatBadgeModule} from '@angular/material/badge';
+import {MatGridListModule} from '@angular/material/grid-list';
 // Components
 import { ContentComponent } from '../layout/content/content.component';
 import { FooterMenuComponent } from '../layout/footer-menu/footer-menu.component';
@@ -56,6 +58,8 @@ import { SideBarComponent } from '../layout/side-bar/side-bar.component';
         MatNativeDateModule,
         MatSnackBarModule,
         MatExpansionModule,
+        MatBadgeModule,
+        MatGridListModule,
         // Module Angular
         ReactiveFormsModule
     ],
@@ -78,6 +82,8 @@ import { SideBarComponent } from '../layout/side-bar/side-bar.component';
         MatNativeDateModule,
         MatSnackBarModule,
         MatExpansionModule,
+        MatBadgeModule,
+        MatGridListModule,
         // Module Angular
         ReactiveFormsModule,
         // component file
