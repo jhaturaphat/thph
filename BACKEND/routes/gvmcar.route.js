@@ -14,7 +14,7 @@ route.post('/reserve',[
         req.validate();
         res.json(await onRevSave(req.body));
     } catch (ex) {      
-        console.log({Error:ex.sqlMessage});  
+        console.log(ex);  
         res.error(ex);
     }    
 })
@@ -22,8 +22,8 @@ route.post('/reserve',[
 route.get('/findall',async(req, res)=>{
     try {
         res.json(await onFindAll());
-    } catch (error) {
-        console.log({Error:ex.sqlMessage});  
+    } catch (ex) {
+        console.log(ex);  
         res.error(ex);
     }
 })

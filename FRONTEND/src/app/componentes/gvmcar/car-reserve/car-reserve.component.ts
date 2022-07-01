@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AlertService } from 'src/app/shared/services/alert.service';
 import { IGvmCarRsv } from '../gvmcar.interface';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-car-reserve',
@@ -19,8 +20,12 @@ export class CarReserveComponent implements OnInit {
   constructor(
     private fb:FormBuilder,
     private GvmcarService:GvmcarService,
-    private alert:AlertService
+    private alert:AlertService,
+    private route: ActivatedRoute,
+    private router: Router,
     ) {
+
+     
 
     this.myForm = this.fb.group({
       gvmcar_rsv_num_of_ple:['', Validators.required],

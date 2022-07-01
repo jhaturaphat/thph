@@ -34,7 +34,6 @@ import { ContentComponent } from '../layout/content/content.component';
 import { FooterMenuComponent } from '../layout/footer-menu/footer-menu.component';
 import { SideBarComponent } from '../layout/side-bar/side-bar.component';
 import { DashboardComponent } from 'src/app/componentes/dashboard/dashboard.component';
-import { CarreservDetailComponent } from 'src/app/componentes/gvmcar/carreserv-detail/carreserv-detail.component';
 
 @NgModule({
     declarations: [
@@ -42,7 +41,7 @@ import { CarreservDetailComponent } from 'src/app/componentes/gvmcar/carreserv-d
         FooterMenuComponent,
         SideBarComponent,
         DashboardComponent,
-        CarreservDetailComponent
+        
     ],
     imports: [
         RouterModule,
@@ -91,7 +90,6 @@ import { CarreservDetailComponent } from 'src/app/componentes/gvmcar/carreserv-d
         MatBadgeModule,
         MatGridListModule,
         MatDialogModule,
-        CarreservDetailComponent,
         // Module Angular
         ReactiveFormsModule,
         // component file
@@ -100,7 +98,7 @@ import { CarreservDetailComponent } from 'src/app/componentes/gvmcar/carreserv-d
         SideBarComponent,
         DashboardComponent,
     ],
-    providers: [
+    providers: [       
         {provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: {appearance: 'fill'}},
         { provide: LOCALE_ID, useValue: "th-TH" } //เพิ่ม LOCATE_ID เข้าไปครับ
     ]

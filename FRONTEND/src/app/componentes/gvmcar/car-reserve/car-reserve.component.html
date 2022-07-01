@@ -61,7 +61,10 @@
                         {{item.gvmcar_rsv_trip_detail}}
                     </mat-card-subtitle>                    
                     <mat-divider></mat-divider>
-                    <button *ngIf="item.user_register_emp_driving" mat-button color="primary"><mat-icon>local_taxi</mat-icon> {{item.fullname}}</button>
+                    <button *ngIf="item.user_register_emp_driving" mat-button color="primary"
+                    [routerLink]="['/gvmcar/drive-profile']" [state]="item">
+                     <mat-icon>local_taxi</mat-icon> {{item.fullname}}
+                    </button>
                     <button *ngIf="item.user_register_emp_driving" mat-button color="primary"><mat-icon>list_alt</mat-icon> รายละเอียด</button>
                 </mat-expansion-panel>
                 

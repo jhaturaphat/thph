@@ -2,17 +2,27 @@
     <mat-card class="example-card">
     
         <div style="display: flex; justify-content: center;">
-            <div mat-card-avatar class="example-header-image" ></div>     
+            <div mat-card-avatar class="example-header-image" >
+                
+            </div>     
         </div>   
     
-    <div>
-        <mat-list>
-            <mat-list-item>Item 1</mat-list-item>
-            <mat-divider></mat-divider>
-            <mat-list-item>Item 2</mat-list-item>
-            <mat-divider></mat-divider>
-            <mat-list-item>Item 3</mat-list-item>
-        </mat-list>
-    </div>    
+        <div>
+            <mat-list>
+                <mat-list-item><mat-icon>local_taxi</mat-icon>  {{detail.fullname }}</mat-list-item>
+                <mat-divider></mat-divider>
+                <mat-list-item>มือถือ {{detail.mobile}}</mat-list-item>                
+            </mat-list>
+        </div>    
+    </mat-card>
+    <mat-card>
+        <mat-card-title>
+            <mat-icon>pin_drop</mat-icon>  
+            {{detail.gvmcar_rsv_trip_job}}
+        </mat-card-title>
+        <mat-card-subtitle>{{detail.gvmcar_rsv_trip_detail}}</mat-card-subtitle>        
+        <mat-card-actions>
+        <button mat-button>ย้อนกลับ</button>
+        </mat-card-actions>
     </mat-card>
 </app-content>
