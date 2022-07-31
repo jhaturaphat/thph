@@ -1,0 +1,34 @@
+<footer class="footer">
+    <mat-toolbar class="footer" color="primary">
+      <div fxFlex fxLayout="row" fxLayoutAlign="space-between center">
+    
+        <button mat-button routerLink="/gvmcar" routerLinkActive="active-menu-item">
+          <div class="toolbar-icon">
+            <mat-icon>collections</mat-icon>
+          </div>
+          <div class="toolbar-icon-text">
+            <span>ประวัติ</span>
+          </div>
+        </button>
+
+        <button mat-button routerLink="/home" routerLinkActive="active-menu-item">
+          <div class="toolbar-icon">
+          <mat-icon aria-hidden="false" aria-label="Example home icon">camera_alt</mat-icon>
+          </div>
+          <div class="toolbar-icon-text">
+            <span>ถ่ายภาพ</span>
+          </div>
+        </button>
+    
+        <button mat-button (click)="onToggleSidenav()">
+          <div class="toolbar-icon">
+            <mat-icon>more_horiz</mat-icon>
+          </div>
+          <div class="toolbar-icon-text">
+            <span>อื่นๆ</span>
+          </div>
+        </button>
+    
+      </div>
+    </mat-toolbar>
+    </footer>

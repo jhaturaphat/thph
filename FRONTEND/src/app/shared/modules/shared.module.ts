@@ -34,6 +34,11 @@ import { ContentComponent } from '../layout/content/content.component';
 import { FooterMenuComponent } from '../layout/footer-menu/footer-menu.component';
 import { SideBarComponent } from '../layout/side-bar/side-bar.component';
 import { DashboardComponent } from 'src/app/componentes/dashboard/dashboard.component';
+//layout-his
+import { ContentHisComponent } from '../layout-his/content-his/content-his.component';
+import { FooterMenuHisComponent } from '../layout-his/footer-menu-his/footer-menu-his.component';
+import { SideBarHisComponent } from '../layout-his/side-bar-his/side-bar-his.component';
+
 
 @NgModule({
     declarations: [
@@ -41,6 +46,10 @@ import { DashboardComponent } from 'src/app/componentes/dashboard/dashboard.comp
         FooterMenuComponent,
         SideBarComponent,
         DashboardComponent,
+        //HIS
+        ContentHisComponent,
+        FooterMenuHisComponent,
+        SideBarHisComponent
         
     ],
     imports: [
@@ -66,7 +75,7 @@ import { DashboardComponent } from 'src/app/componentes/dashboard/dashboard.comp
         MatGridListModule,
         MatDialogModule,
         // Module Angular
-        ReactiveFormsModule
+        ReactiveFormsModule,        
     ],
     exports: [
         RouterModule,
@@ -91,12 +100,16 @@ import { DashboardComponent } from 'src/app/componentes/dashboard/dashboard.comp
         MatGridListModule,
         MatDialogModule,
         // Module Angular
-        ReactiveFormsModule,
+        ReactiveFormsModule,        
         // component file
         ContentComponent,
         FooterMenuComponent,
         SideBarComponent,
         DashboardComponent,
+        //HIS
+        ContentHisComponent,
+        FooterMenuHisComponent,
+        SideBarHisComponent
     ],
     providers: [       
         {provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: {appearance: 'fill'}},

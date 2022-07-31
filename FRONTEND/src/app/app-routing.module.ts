@@ -10,6 +10,10 @@ const routes: Routes = [
   {
     path:'gvmcar',
     loadChildren: () => import('./shared/modules/gvmcar.module').then(m=>m.GvmCarModule)
+  },
+  {
+    path:'his',
+    loadChildren: () => import('./shared/modules/his.module').then(m=>m.HisModule)
   }
 ];
 

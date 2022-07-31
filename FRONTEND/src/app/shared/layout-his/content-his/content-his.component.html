@@ -1,0 +1,16 @@
+<mat-sidenav-container fullscreen>
+    <mat-sidenav #sidenav role="navigation" mode="over">
+      <app-side-bar-his (sideNavClosed)="sidenav.close()"></app-side-bar-his>
+    </mat-sidenav>
+  
+    <mat-sidenav-content fxLayout="column">
+      <div class="header">
+        <!-- <app-header-mobile fxHide fxShow.lt-sm> </app-header-mobile> -->
+      </div>
+  
+      <main class="container mat-app-background">
+        <ng-content></ng-content>                
+      </main>  
+      <app-footer-menu-his (sidenavToggle)="sidenav.toggle()"></app-footer-menu-his>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
