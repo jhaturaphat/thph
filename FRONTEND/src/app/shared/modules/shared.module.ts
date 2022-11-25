@@ -28,6 +28,11 @@ import {MatExpansionModule} from '@angular/material/expansion';
 import {MatBadgeModule} from '@angular/material/badge';
 import {MatGridListModule} from '@angular/material/grid-list';
 import {MatDialogModule} from '@angular/material/dialog';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import {MatSortModule} from '@angular/material/sort';
+import {MatTableModule} from '@angular/material/table';
+
+import {CdkTableModule} from '@angular/cdk/table';
 
 // Components
 import { ContentComponent } from '../layout/content/content.component';
@@ -35,22 +40,19 @@ import { FooterMenuComponent } from '../layout/footer-menu/footer-menu.component
 import { SideBarComponent } from '../layout/side-bar/side-bar.component';
 import { DashboardComponent } from 'src/app/componentes/dashboard/dashboard.component';
 //layout-his
-import { ContentHisComponent } from '../layout-his/content-his/content-his.component';
-import { FooterMenuHisComponent } from '../layout-his/footer-menu-his/footer-menu-his.component';
-import { SideBarHisComponent } from '../layout-his/side-bar-his/side-bar-his.component';
+// import { ContentHisComponent } from '../layout-his/content-his/content-his.component';
+// import { FooterMenuHisComponent } from '../layout-his/footer-menu-his/footer-menu-his.component';
+// import { SideBarHisComponent } from '../layout-his/side-bar-his/side-bar-his.component';
 
 
 @NgModule({
     declarations: [
+        // App Layout
         ContentComponent,
         FooterMenuComponent,
-        SideBarComponent,
-        DashboardComponent,
-        //HIS
-        ContentHisComponent,
-        FooterMenuHisComponent,
-        SideBarHisComponent
-        
+        SideBarComponent,        
+        //Component
+        DashboardComponent    
     ],
     imports: [
         RouterModule,
@@ -74,6 +76,10 @@ import { SideBarHisComponent } from '../layout-his/side-bar-his/side-bar-his.com
         MatBadgeModule,
         MatGridListModule,
         MatDialogModule,
+        MatProgressSpinnerModule,
+        MatSortModule,
+        MatTableModule,
+        CdkTableModule,
         // Module Angular
         ReactiveFormsModule,        
     ],
@@ -99,6 +105,10 @@ import { SideBarHisComponent } from '../layout-his/side-bar-his/side-bar-his.com
         MatBadgeModule,
         MatGridListModule,
         MatDialogModule,
+        MatProgressSpinnerModule,
+        MatSortModule,
+        MatTableModule,
+        CdkTableModule,     
         // Module Angular
         ReactiveFormsModule,        
         // component file
@@ -107,9 +117,6 @@ import { SideBarHisComponent } from '../layout-his/side-bar-his/side-bar-his.com
         SideBarComponent,
         DashboardComponent,
         //HIS
-        ContentHisComponent,
-        FooterMenuHisComponent,
-        SideBarHisComponent
     ],
     providers: [       
         {provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: {appearance: 'fill'}},

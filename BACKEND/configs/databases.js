@@ -10,4 +10,9 @@ const connection  = mysql.createPool({
   port            : process.env.DB_PORT
 });
 
+// แก้ภาษาต่างดาว
+connection.on('connection', function (connection) {
+  connection.query('SET NAMES "utf8"');            
+});
+
 module.exports = connection;

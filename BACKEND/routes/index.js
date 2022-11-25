@@ -1,5 +1,5 @@
 const route = require('express').Router();
 
-route.use('/gvmcar', require('./gvmcar.route'));
+route.use('/his/lab', require('./lab.route'));
 
 module.exports = route;
