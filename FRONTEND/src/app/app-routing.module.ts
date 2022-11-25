@@ -4,16 +4,16 @@ import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './componentes/login/login.component';
 
 const routes: Routes = [
-  {
-    path:'',
-    component:DashboardComponent
-  },    
+  // {
+  //   path:'',
+  //   component:DashboardComponent
+  // },    
   {
     path:'login',
     component:LoginComponent
   },
   {
-    path:'his',
+    path:'',
     loadChildren: () => import('./shared/modules/his.module').then(m=>m.HisModule)
   }
 ];

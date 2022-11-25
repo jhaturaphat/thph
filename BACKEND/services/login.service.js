@@ -1,13 +1,30 @@
+require('dotenv').config();
+const jwt = require("jsonwebtoken");
 const connection = require('../configs/databases');
+const crypto = require('crypto');
 
 module.exports = {
-    Login(value){
+    onLogin(value){
         return new Promise((resolve, reject) => {
-            connection.query("SELECT * FROM tambonservice WHERE userid=? AND pass=?",[value],(error, result)=>{
+            connection.query("SELECT userid FROM tambonservice WHERE userid=? AND pass=?",[value['username'], value['password']],(error, result)=>{
                 if(error) {
-                    reject()
+                    reject(error);
                 }
-                resolve();
+                console.log(result[0].userid);
+                if(!result.length > 0) {
+                    reject("Username or password is invlid");
+                }
+                const payload = {
+                    name: result[0].userid,
+                    uuid: crypto.randomUUID(),         
+                    // scopes: ["create","read","update","delete"], //For Permission FULL
+                    scopes: ["read"]
+                };
+
+                const token = jwt.sign(payload, process.env.SECRET_KEY, {expiresIn:"1h"}); 
+                const access_token = new Object();
+                        access_token.token = token;
+                resolve(access_token);
             })
         })
     }
