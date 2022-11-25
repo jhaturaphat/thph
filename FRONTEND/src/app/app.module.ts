@@ -8,6 +8,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { SharedModule } from './shared/modules/shared.module';
 import { LoginComponent } from './componentes/login/login.component';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AuthenInterceptor } from './services/authen.interceptor';
 
 
 
@@ -24,7 +26,13 @@ import { LoginComponent } from './componentes/login/login.component';
     BrowserAnimationsModule,
     SharedModule
     ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthenInterceptor,
+      multi:true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

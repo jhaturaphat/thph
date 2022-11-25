@@ -3,8 +3,8 @@ const {check} = require('express-validator');
 const { onLogin } = require('../services/login.service');
 
 route.post('/',[    
-    check('username').not().isEmpty(),
-    check('password').not().isEmpty()
+    check('userid').not().isEmpty(),
+    check('pass').not().isEmpty()
 ], async (req, res)=>{
     try {
         req.validate();

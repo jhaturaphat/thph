@@ -9,7 +9,7 @@ module.exports = (credentials = [])=>{
 
         //มองหา JWT in Header
         const {authorization} = req.headers        
-        if(!authorization) return res.status(401).send("ไม่มีสิทธิ์เข้าถึง: 401 Unauthorized");        
+        if(!authorization) return res.status(401).send({message:"ไม่มีสิทธิ์เข้าถึง: 401 Unauthorized"});        
         // ตรวจสอบ JWT Bearer         
         const tokenBody = authorization.split(' ')[1];        
         jwt.verify(tokenBody, process.env.SECRET_KEY, (err, decoded)=>{
