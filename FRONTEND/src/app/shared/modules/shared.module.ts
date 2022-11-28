@@ -32,8 +32,6 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatSortModule} from '@angular/material/sort';
 import {MatTableModule} from '@angular/material/table';
 
-import {CdkTableModule} from '@angular/cdk/table';
-
 // Components
 import { ContentComponent } from '../layout/content/content.component';
 import { FooterMenuComponent } from '../layout/footer-menu/footer-menu.component';
@@ -79,7 +77,6 @@ import { DashboardComponent } from 'src/app/componentes/dashboard/dashboard.comp
         MatProgressSpinnerModule,
         MatSortModule,
         MatTableModule,
-        CdkTableModule,
         // Module Angular
         ReactiveFormsModule,        
     ],
@@ -107,8 +104,7 @@ import { DashboardComponent } from 'src/app/componentes/dashboard/dashboard.comp
         MatDialogModule,
         MatProgressSpinnerModule,
         MatSortModule,
-        MatTableModule,
-        CdkTableModule,     
+        MatTableModule,    
         // Module Angular
         ReactiveFormsModule,        
         // component file
@@ -119,7 +115,7 @@ import { DashboardComponent } from 'src/app/componentes/dashboard/dashboard.comp
         //HIS
     ],
     providers: [       
-        {provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: {appearance: 'fill'}},
+        // {provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: {appearance: 'fill'}},
         { provide: LOCALE_ID, useValue: "th-TH" } //เพิ่ม LOCATE_ID เข้าไปครับ
     ]
 })

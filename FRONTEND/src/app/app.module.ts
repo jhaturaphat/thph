@@ -30,7 +30,8 @@ import { AuthenInterceptor } from './services/authen.interceptor';
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthenInterceptor,
-      multi:true
+      multi:true,
+      // providers: [{ provide: APP_BASE_HREF, useValue: '/my-app/' },
     }
   ],
   bootstrap: [AppComponent]
