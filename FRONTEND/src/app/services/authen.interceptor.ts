@@ -22,8 +22,7 @@ export class AuthenInterceptor implements HttpInterceptor {
     if(token){
       const clone = request.clone({headers: request.headers.set("Authorization",`Bearer ${token}`)});
       return next.handle(clone).pipe(catchError(error => {
-        console.log("Intercapter Error : ", error);
-        
+        // console.log("Intercapter Error : ", error);        
         if(error.status === 401){
           this.router.navigate(['login'])
         }

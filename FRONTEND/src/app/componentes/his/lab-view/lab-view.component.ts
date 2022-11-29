@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ILabview } from 'src/app/interfaces/labview.interface';
 import { HisLabService } from 'src/app/services/his.lab.service';
+import { AlertService } from 'src/app/shared/services/alert.service';
 import * as XLSX from 'xlsx';
 
 @Component({
@@ -17,7 +18,8 @@ export class LabViewComponent implements OnInit {
 
   constructor(
     private fb:FormBuilder, 
-    private labService:HisLabService
+    private labService:HisLabService,
+    private alert:AlertService
     ) {
     this.myForm = this.fb.group({
       lab_start_date:['', Validators.required],
@@ -40,7 +42,8 @@ export class LabViewComponent implements OnInit {
       console.log(this.labResult);      
     }).catch (err => {
       this.loading = false; 
-      alert(err.error.message);     
+      this.alert.openSnackBar(err.error.message);
+      // alert(err.error.message);     
       console.log(err);      
     });    
   }
