@@ -22,8 +22,8 @@ export class LoginComponent implements OnInit {
     private router:Router
   ) {
     this.fg = this.fBulider.group({
-      'userid': ['AdisakPra', Validators.required],
-      'pass': ['AdIsAk2408', Validators.required]
+      'userid': ['', Validators.required], 
+      'pass': ['', Validators.required] 
     })
    }
 
