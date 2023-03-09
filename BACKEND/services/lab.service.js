@@ -114,9 +114,9 @@ module.exports = {
             ORDER BY ll.hn limit 10
             `;   
             
-            // console.log(sql);
-            connection.query(sql,[start_date, end_date], (error, result)=>{                
-                if(error) return reject(error);                 
+            console.log(sql);
+            connection.query(sql,[start_date, end_date], (error, result)=>{                 
+                if(error) return reject(error);                  
                 resolve(result);
             });            
         }) 
