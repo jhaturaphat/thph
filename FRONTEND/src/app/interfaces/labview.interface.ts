@@ -1,6 +1,7 @@
 import { Time } from "@angular/common";
 
 export interface ILabview {
+HDL: any;
     vn:String,
     cid:String,
     pname:String,

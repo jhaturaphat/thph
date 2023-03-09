@@ -22,7 +22,7 @@ import { MatInputModule } from '@angular/material/input';
 import {MatCardModule} from '@angular/material/card';
 import {MatDividerModule} from '@angular/material/divider';
 import {MatDatepickerModule} from '@angular/material/datepicker';
-import { MatNativeDateModule } from '@angular/material/core';
+import { MatNativeDateModule , MatRippleModule} from '@angular/material/core';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {MatBadgeModule} from '@angular/material/badge';
@@ -31,6 +31,7 @@ import {MatDialogModule} from '@angular/material/dialog';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatSortModule} from '@angular/material/sort';
 import {MatTableModule} from '@angular/material/table';
+import {MatSelectModule} from '@angular/material/select';
 
 // Components
 import { ContentComponent } from '../layout/content/content.component';
@@ -69,6 +70,7 @@ import { DashboardComponent } from 'src/app/componentes/dashboard/dashboard.comp
         MatDividerModule,
         MatDatepickerModule,
         MatNativeDateModule,
+        MatRippleModule,
         MatSnackBarModule,
         MatExpansionModule,
         MatBadgeModule,
@@ -77,6 +79,8 @@ import { DashboardComponent } from 'src/app/componentes/dashboard/dashboard.comp
         MatProgressSpinnerModule,
         MatSortModule,
         MatTableModule,
+        MatSelectModule,
+        
         // Module Angular
         ReactiveFormsModule,        
     ],
@@ -97,6 +101,7 @@ import { DashboardComponent } from 'src/app/componentes/dashboard/dashboard.comp
         MatDividerModule,
         MatDatepickerModule,
         MatNativeDateModule,
+        MatRippleModule,
         MatSnackBarModule,
         MatExpansionModule,
         MatBadgeModule,
@@ -105,6 +110,8 @@ import { DashboardComponent } from 'src/app/componentes/dashboard/dashboard.comp
         MatProgressSpinnerModule,
         MatSortModule,
         MatTableModule,    
+        MatSelectModule,
+        
         // Module Angular
         ReactiveFormsModule,        
         // component file
@@ -115,8 +122,8 @@ import { DashboardComponent } from 'src/app/componentes/dashboard/dashboard.comp
         //HIS
     ],
     providers: [       
-        // {provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: {appearance: 'fill'}},
-        { provide: LOCALE_ID, useValue: "th-TH" } //เพิ่ม LOCATE_ID เข้าไปครับ
+        {provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: {appearance: 'fill'}},
+        { provide: LOCALE_ID, useValue: "th-TH" }, //เพิ่ม LOCATE_ID เข้าไปจะทำให้เมนูเป็นภาษาไทย
     ]
 })
 

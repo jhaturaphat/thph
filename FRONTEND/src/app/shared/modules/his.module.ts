@@ -23,11 +23,12 @@ import { LabViewComponent } from "src/app/componentes/his/lab-view/lab-view.comp
     HisRoutingModule
   ],
   exports: [
+    // SharedModule,
     // // Component
-    // ContentHisComponent,
-    // FooterMenuHisComponent,
-    // SideBarHisComponent,
-    // LabViewComponent
+    ContentHisComponent,
+    FooterMenuHisComponent,
+    SideBarHisComponent,
+    LabViewComponent
   ]
 })
 export class HisModule { }

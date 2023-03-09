@@ -10,6 +10,7 @@ import { SharedModule } from './shared/modules/shared.module';
 import { LoginComponent } from './componentes/login/login.component';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthenInterceptor } from './services/authen.interceptor';
+import { HisModule } from './shared/modules/his.module';
 
 
 
@@ -24,7 +25,8 @@ import { AuthenInterceptor } from './services/authen.interceptor';
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    SharedModule
+    SharedModule,
+    HisModule
     ],
   providers: [
     {

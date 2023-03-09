@@ -7,6 +7,9 @@ module.exports = {
             const start_date = value['lab_start_date'];
             const end_date = value['lab_end_date'];
 
+            console.log(start_date, ' ถึง ', end_date);
+            // return resolve(true);
+
             const diffInMs = new Date(end_date) - new Date(start_date);
             const diffDays = diffInMs / (1000 * 60 * 60 * 24);
 
@@ -111,7 +114,7 @@ module.exports = {
             ORDER BY ll.hn limit 10
             `;   
             
-            console.log(sql);
+            // console.log(sql);
             connection.query(sql,[start_date, end_date], (error, result)=>{                
                 if(error) return reject(error);                 
                 resolve(result);

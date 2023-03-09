@@ -1,4 +1,7 @@
 <h1>DUCPH-PPL Angular 13</h1> 
+<br>
+#npm run build
+<br>
 Mobile menu
 </br>
 mysql workbench 6.3 ce <br>
