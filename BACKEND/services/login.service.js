@@ -5,8 +5,8 @@ const crypto = require('crypto');
 
 module.exports = {
     onLogin(value){
-        return new Promise((resolve, reject) => {
-            connection.query("SELECT userid FROM tambonservice WHERE userid=? AND pass=?",[value['userid'], value['pass']],(error, result)=>{
+        return new Promise((resolve, reject) => {           
+            connection.query("SELECT userid FROM tambonservice WHERE userid=? AND pass=?",[ value['userid'], value['pass'] ],(error, result)=>{
                 if(error) {
                     return reject(error);
                 }                
