@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "nodemon",
-    "start" : "node index.js",
+    "start": "node index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Jaturapat Siriboon",
@@ -22,7 +22,8 @@
     "npm": "^9.1.2",
     "passport": "^0.6.0",
     "passport-jwt": "^4.0.0",
-    "passport-local": "^1.0.0"
+    "passport-local": "^1.0.0",
+    "sql-injection": "^0.0.7"
   },
   "devDependencies": {
     "nodemon": "^2.0.18"

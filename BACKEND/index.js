@@ -1,5 +1,6 @@
 require('dotenv').config();
 const express = require('express');
+const sqlinjection = require('sql-injection');
 const https = require('https');
 const path = require('path');
 const fs = require('fs');
@@ -20,6 +21,7 @@ const app = express();
 app.use(cors());
 app.use(bodyParser.urlencoded({ extended: false })); // parse application/x-www-form-urlencoded
 app.use(bodyParser.json()); // parse application/json
+app.use(sqlinjection);  // add sql-injection middleware here
 
 // app.use(session({
 //   secret: 'keyboard secret key',
