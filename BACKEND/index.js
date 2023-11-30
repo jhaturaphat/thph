@@ -1,6 +1,6 @@
 require('dotenv').config();
 const express = require('express');
-const sqlinjection = require('sql-injection');
+// const sqlinjection = require('sql-injection');
 const https = require('https');
 const path = require('path');
 const fs = require('fs');
@@ -21,7 +21,7 @@ const app = express();
 app.use(cors());
 app.use(bodyParser.urlencoded({ extended: false })); // parse application/x-www-form-urlencoded
 app.use(bodyParser.json()); // parse application/json
-app.use(sqlinjection);  // add sql-injection middleware here
+// app.use(sqlinjection);  // add sql-injection middleware here
 
 // app.use(session({
 //   secret: 'keyboard secret key',
@@ -31,14 +31,13 @@ app.use(sqlinjection);  // add sql-injection middleware here
 // }));
 
 // สร้าง Custom function
-
 app.use(require('./configs/middleware'));
 
 // เรียกใช้งาน Routes
 app.use('/api', require('./routes'));
 
 app.get('*',(req, res) => {
-    res.send('<h1>Server is start Sucess</h1>')
+    res.send(`<h1>Server is start on PORT ${PORT} </h1>`)
 })
 
 const PORT = process.env.PORT;

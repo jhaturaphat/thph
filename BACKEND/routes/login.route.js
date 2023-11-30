@@ -5,7 +5,7 @@ const { onLogin } = require('../services/login.service');
 route.post('/',[    
     check('userid').not().isEmpty(),
     check('pass').not().isEmpty()
-], async (req, res)=>{
+], async (req, res)=>{    
     try {
         req.validate();
         res.json(await onLogin(req.body));
@@ -14,5 +14,6 @@ route.post('/',[
         res.error(ex);
     }    
 })
+
 
 module.exports = route;
