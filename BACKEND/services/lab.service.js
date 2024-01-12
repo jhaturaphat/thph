@@ -23,7 +23,10 @@ module.exports = {
             ,if(l6.lab_items_code = '39',l6.lab_order_result,'-') as Tri
             ,if(l7.lab_items_code = '853',l7.lab_order_result,'-') as LDL
             ,if(l8.lab_items_code = '36',l8.lab_order_result,'-') as HDL
-            from(
+            ,if(l9.lab_items_code = '699',l9.lab_order_result,'-') as 'FBS'
+
+            FROM(
+
             select h.vn,p.cid,p.pname,p.fname,p.lname,p.hn
             ,if(h.department='OPD',pt.name,pt2.name) as 'pttype'
             ,if(h.department='OPD',v.age_y,a.age_y) as 'age'
@@ -58,7 +61,8 @@ module.exports = {
             left outer join opdscreen ops on ops.vn=v.vn
 
             WHERE
-            l.lab_items_code in ('225','222','1087','39','36','853') #LAB
+
+            l.lab_items_code in ('225','222','1087','39','36','853', '699') #LAB
             #and p.work_addr like 'รพร.เดชอุด%' 
             and h.order_date BETWEEN '${start_date}' and '${end_date}'
             and length(h.vn)=12 
@@ -120,11 +124,19 @@ module.exports = {
                     AND l.lab_items_code = '853'
                 GROUP BY lh.vn,l.lab_items_code
                 ) l8 on l8.vn = ll.vn
-            GROUP BY ll.vn
-            ORDER BY ll.hn limit 10
+            LEFT OUTER JOIN (
+                select lh.vn,l.lab_items_code,l.lab_order_result
+                from lab_head lh
+                LEFT OUTER JOIN lab_order l on l.lab_order_number = lh.lab_order_number
+                where  l.lab_order_result is not null  and lh.order_date BETWEEN '${start_date}' and '${end_date}'
+                #and l.lab_order_result <> ''   and l.confirm = 'Y'
+                    AND l.lab_items_code = '699'
+                GROUP BY lh.vn,l.lab_items_code
+                ) l9 on l9.vn = ll.vn
+            #ORDER BY ll.hn limit 10
             `;   
             
-            // console.log(sql);
+            console.log(sql);
             connection.query(sql,[start_date, end_date], (error, result)=>{                 
                 if(error) return reject(error);                  
                 resolve(result);

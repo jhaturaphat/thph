@@ -26,5 +26,6 @@ HDL: any;
     Creatinine:Number,
     eGFR:Number,
     Tri:String,
-    LDL:Number
+    LDL:Number,
+    FBS:Number
 }
