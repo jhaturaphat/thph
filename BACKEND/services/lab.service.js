@@ -105,7 +105,7 @@ module.exports = {
             #and l.lab_order_result <> ''   and l.confirm = 'Y'   
                 AND l.lab_items_code = '39'
             GROUP BY lh.vn,l.lab_items_code
-            ) l6 on l6.vn = ll.vn
+            ) l6 on l6.vn = ll.vn    
             LEFT OUTER JOIN (
             select lh.vn,l.lab_items_code,l.lab_order_result
             from lab_head lh 
@@ -121,7 +121,7 @@ module.exports = {
                 LEFT OUTER JOIN lab_order l on l.lab_order_number = lh.lab_order_number
                 where  l.lab_order_result is not null  and lh.order_date BETWEEN '${start_date}' and '${end_date}'
                 #and l.lab_order_result <> ''   and l.confirm = 'Y'   
-                    AND l.lab_items_code = '853'
+                    AND l.lab_items_code = '36'
                 GROUP BY lh.vn,l.lab_items_code
                 ) l8 on l8.vn = ll.vn
             LEFT OUTER JOIN (
@@ -136,7 +136,7 @@ module.exports = {
             #ORDER BY ll.hn limit 10
             `;   
             
-            console.log(sql);
+            //console.log(sql);
             connection.query(sql,[start_date, end_date], (error, result)=>{                 
                 if(error) return reject(error);                  
                 resolve(result);
