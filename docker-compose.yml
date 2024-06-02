@@ -1,12 +1,21 @@
 version: '3'
 
-services:
+backend:
   thph-backend:
     build:
-      context: .
+      context: ./BACKEND
       dockerfile: Dockerfile
     container_name: thph-backend
     ports:
       - "3000:3000"
     environment:
       NODE_ENV: production
+
+frontend:
+    build:
+      context: ./FRONTEND
+      dockerfile: Dockerfile
+    ports:
+      - "4200:4200"
+    depends_on:
+      - backend
