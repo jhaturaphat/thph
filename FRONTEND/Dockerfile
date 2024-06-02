@@ -1,10 +1,11 @@
-# Use the official image as a parent image
-FROM node:16-alpine
+# Stage 1: Build the Angular application
+FROM node:latest AS build
 WORKDIR /app
-COPY . .
-RUN npm install -g @angular/cli@latest
+COPY package.json package-lock.json ./
 RUN npm install
-RUN ng build --prod
+COPY . .
+RUN npm run build --prod
 
+# Stage 2: Serve the Angular application with Nginx
 FROM nginx:alpine
-COPY --from=build /app/dist/frontend /usr/share/nginx/html
+COPY --from=build /app/dist/your-angular-app-name /usr/share/nginx/html
