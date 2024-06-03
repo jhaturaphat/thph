@@ -4,7 +4,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve --open --port 4401 --configuration development",
-    "build": "ng build --output-path=dist/frontend --base-href=/thph/ --configuration production",
+    "build": "ng build --output-path=dist/frontend --base-href=/ --configuration production",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
   },
