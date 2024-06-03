@@ -34,7 +34,7 @@ app.use(bodyParser.json()); // parse application/json
 app.use(require('./configs/middleware'));
 
 // เรียกใช้งาน Routes
-app.use('/', require('./routes'));
+app.use('/api', require('./routes'));
 
 app.get('*',(req, res) => {
     res.send(`<h1>Server is start on PORT ${PORT} </h1>`)
