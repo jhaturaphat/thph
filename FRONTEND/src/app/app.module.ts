@@ -11,15 +11,14 @@ import { LoginComponent } from './componentes/login/login.component';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthenInterceptor } from './services/authen.interceptor';
 import { HisModule } from './shared/modules/his.module';
-
-
+import { APP_BASE_HREF } from '@angular/common';
 
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent,     
+    LoginComponent,
   ],
   imports: [
     BrowserModule,
@@ -27,14 +26,11 @@ import { HisModule } from './shared/modules/his.module';
     BrowserAnimationsModule,
     SharedModule,
     HisModule
-    ],
+  ],
   providers: [
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: AuthenInterceptor,
-      multi:true,
-      // providers: [{ provide: APP_BASE_HREF, useValue: '/my-app/' },
-    }
+    { provide: HTTP_INTERCEPTORS, useClass: AuthenInterceptor, multi: true},
+    // { provide: APP_BASE_HREF, useValue: '/' }
+
   ],
   bootstrap: [AppComponent]
 })
