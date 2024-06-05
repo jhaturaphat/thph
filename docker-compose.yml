@@ -10,6 +10,7 @@ services:
       - "3000:3000"
     environment:
       NODE_ENV: production
+    restart: always
 
   frontend:
       build:
@@ -20,5 +21,6 @@ services:
         - "4201:80"
       depends_on:
         - backend
-      #environment:
-        #NODE_ENV: production
+      environment:
+        NODE_ENV: production
+      restart: always
