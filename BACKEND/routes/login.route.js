@@ -1,6 +1,6 @@
 const route = require('express').Router();
 const {check} = require('express-validator');
-const { onLogin } = require('../services/login.service');
+const { onLogin, onLoginAttempts } = require('../services/login.service');
 
 route.post('/',[    
     check('userid').not().isEmpty(),
@@ -8,7 +8,7 @@ route.post('/',[
 ], async (req, res)=>{    
     try {
         req.validate();
-        res.json(await onLogin(req.body));
+        res.json(await onLoginAttempts(req.body));
     } catch (ex) {      
         console.log(ex);  
         res.error(ex);

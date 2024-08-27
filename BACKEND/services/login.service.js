@@ -46,7 +46,7 @@ module.exports = {
     
                 // ตรวจสอบว่าบัญชีถูกล็อกอยู่หรือไม่
                 if (user.lock_until && user.lock_until > Date.now()) {
-                    return reject({message: "Account is locked. Try again later."});
+                    return reject({message: "บัญชีถูกล็อค ลองอีกครั้งในภายหลัง"});
                 }
     
                 // ตรวจสอบรหัสผ่าน
