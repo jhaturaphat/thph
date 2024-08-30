@@ -1,6 +1,7 @@
 require('dotenv').config();
 const jwt = require("jsonwebtoken");
 const connection = require('../configs/databases');
+const { notify } = require("../services/line.service")
 const crypto = require('crypto');
 
 module.exports = {
@@ -20,14 +21,13 @@ module.exports = {
                         // scopes: ["create","read","update","delete"], //For Permission FULL
                         scopes: ["read"]
                     };
-
                     const token = jwt.sign(payload, process.env.SECRET_KEY, {expiresIn:"1h"}); 
                     const access_token = new Object();
-                            access_token.token = token;
+                          access_token.token = token;
                     return resolve(access_token);
                 }
                 
-            })
+            });
         })
     },
     onLoginAttempts(value){
@@ -46,7 +46,8 @@ module.exports = {
     
                 // ตรวจสอบว่าบัญชีถูกล็อกอยู่หรือไม่
                 if (user.lock_until && user.lock_until > Date.now()) {
-                    return reject({message: "บัญชีถูกล็อค ลองอีกครั้งในภายหลัง"});
+                    notify(value['userid']);
+                    return reject({message: "ลองอีกครั้งในภายหลัง"});
                 }
     
                 // ตรวจสอบรหัสผ่าน
@@ -82,7 +83,7 @@ module.exports = {
                         return resolve(access_token);
                     });
                 }
-            })
+            });
         });
     }
 }
