@@ -5,6 +5,7 @@ import { LoginService } from 'src/app/services/login.service';
 import { AlertService } from 'src/app/shared/services/alert.service';
 import { AppUrl } from 'src/app/URL';
 
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -19,7 +20,7 @@ export class LoginComponent implements OnInit {
     private fBulider:FormBuilder,
     private login:LoginService,
     private alert:AlertService,
-    private router:Router
+    private router:Router,    
   ) {
     this.fg = this.fBulider.group({
       'userid': ['', Validators.required], 

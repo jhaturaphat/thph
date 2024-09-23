@@ -18,20 +18,7 @@ export class HisLabService{
     
 
     find(lab_start_date:any, lab_end_date:any){
-        return lastValueFrom(this.http.post(this.apiURL+'/lab-view', {lab_start_date, lab_end_date})) as Promise<ILabview[]>    
-        /*return new Promise((resolve, reject) => {
-            this.http.post(this.apiURL+'/lab-view', body).
-            toPromise()
-            .then(
-                res => {
-                    //console.log(res); 
-                    resolve(res);                 
-                },
-                err => {
-                    reject(err);
-                }
-            )
-        });*/
+        return lastValueFrom(this.http.post(this.apiURL+'/lab-view', {lab_start_date, lab_end_date})) as Promise<ILabview[]>            
     }
     
 }

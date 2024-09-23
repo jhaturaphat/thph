@@ -4,6 +4,7 @@ import { LOCALE_ID, NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
+import { JwtHelperService, JWT_OPTIONS } from '@auth0/angular-jwt';
 
 import { ReactiveFormsModule } from '@angular/forms';
 
@@ -53,7 +54,7 @@ import { DashboardComponent } from 'src/app/componentes/dashboard/dashboard.comp
         //Component
         DashboardComponent    
     ],
-    imports: [
+    imports: [        
         RouterModule,
         CommonModule,
         HttpClientModule,
@@ -124,6 +125,8 @@ import { DashboardComponent } from 'src/app/componentes/dashboard/dashboard.comp
     providers: [       
         {provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: {appearance: 'fill'}},
         { provide: LOCALE_ID, useValue: "th-TH" }, //เพิ่ม LOCATE_ID เข้าไปจะทำให้เมนูเป็นภาษาไทย
+        { provide: JWT_OPTIONS, useValue: JWT_OPTIONS },
+        JwtHelperService,
     ]
 })
 

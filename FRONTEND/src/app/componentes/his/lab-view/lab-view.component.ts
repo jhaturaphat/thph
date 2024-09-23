@@ -22,7 +22,7 @@ export class LabViewComponent implements OnInit {
     private fb:FormBuilder, 
     private labService:HisLabService,
     private alert:AlertService,
-    private router:Router
+    private router:Router,    
     ) {
       
     this.myForm = this.fb.group({
@@ -32,7 +32,9 @@ export class LabViewComponent implements OnInit {
    
    }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    
+  }
 
  
   async labReport(){
