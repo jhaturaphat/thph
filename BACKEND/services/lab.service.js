@@ -37,9 +37,9 @@ module.exports = {
                 // ประมวลผลข้อมูลเพิ่มเติมหรือส่งกลับไปยัง Frontend
             } catch (err) {
                 console.error('Error fetching data:', err);
-                return false;
+                return {message:err};
             } finally {
-                connection.end(); // ปิด Connection Pool                
+                //connection.end(); // ปิด Connection Pool                
             } 
 
             //console.log(sql);
