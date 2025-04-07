@@ -1,15 +1,14 @@
 <app-content-his>
 
     <mat-toolbar class="mat-elevation-z4" color="primary">
-        <h1>ประวัติการสั่ง LAB</h1>
-        <form class="example-form">
+        <h1>ประวัติการสั่งตรวจ LAB รพร.เดชอุดม</h1>
+        <form class="example-form" [formGroup]="Fsearch">
             <mat-form-field class="example-full-width">
               <mat-label>พิมพ์ค้นหา HN , CID</mat-label>
-              <input matInput placeholder="Ex. Pizza" value="">
-              <mat-icon matSuffix>search</mat-icon>
-            </mat-form-field>          
-           
-          </form>
+              <input matInput  formControlName="keyword" [(ngModel)]="value" appEnterKey (enterKey)="findKeyword($event)">
+              <mat-icon matSuffix (click)="findKeyword($event)">search</mat-icon>             
+            </mat-form-field>  
+        </form>
     </mat-toolbar>
     <mat-progress-bar mode="determinate"></mat-progress-bar>
 
@@ -18,8 +17,10 @@
             <div class="container">
                 <div class="item-left">
                     <mat-list role="list">
-                        <mat-list-item *ngFor="let item of labOrders; let i = index" role="listitem" 
-                        (click)="findLabItem($event,item.lab_order_number, i )"
+                        <mat-list-item *ngFor="let item of labOrders; let i = index" 
+                        role="listitem" 
+                        (click)="findLabItem($event,item.lab_order_number, i )"     
+                        [class.ActiveList]="selectedIndex === i"                   
                         >
                             {{item.vstdate | date:'yyyy-MM-dd':'UTC':'en-US'}}
                             <mat-divider></mat-divider>

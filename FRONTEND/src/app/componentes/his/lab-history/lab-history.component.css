@@ -2,6 +2,11 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    align-items: center;
+}
+.example-full-width{
+    margin-top: 15px;
+    
 }
 
 mat-grid-tile {
@@ -19,6 +24,13 @@ mat-grid-tile {
     background-color: #3f51b5;
     color: aliceblue;
   }
+  .ActiveList{
+    background-color: #3f51b5;
+  }
+
+  mat-icon{
+    cursor: pointer;
+  }
 
   .container{
     display: flex; 
@@ -28,13 +40,15 @@ mat-grid-tile {
   .item-left{
     /* background-color: antiquewhite; */
     width: 200px;
-    height: 87vh;
+    height: 80vh;
     overflow: scroll;
+    margin-top: 50px;
   }
   .item-content{
     /* background-color: aqua; */
     width: 100%;
-    margin-left: 5px;
+    margin-left: 5px;    
+    overflow: scroll;
   }
   table {
     width: 100%;

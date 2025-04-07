@@ -22,7 +22,7 @@ route.post('/lab-order', (authorize(role)),[
     check('param').not().isEmpty(),
 ], async (req, res)=>{
     req.validate();
-    res.json(await onFindLabOrder(req.body));
+    res.json(await onFindLabOrder(req.body.param));
 });
 // ดูรายการปล LAB
 route.post('/lab-result',(authorize(role)),[

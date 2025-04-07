@@ -2,6 +2,10 @@ const connection = require('../configs/databases');
 const { splitDateRange, fetchData } = require('../services/fn/lab.query');
 
 module.exports = {
+    //ใส่่ 000000000 หน้า HN ให้ครบ 9 หลัก
+    formatHn(hn) {
+        return hn.padStart(9, '0');
+    },
     async onFind (value){        
         // return new Promise(async (resolve, reject)=>{ 
             const start_date = value['lab_start_date'];
@@ -54,15 +58,19 @@ module.exports = {
         if (!value) {
             return Promise.reject(new Error('Parameter is required'));
         }
-        console.log(value);
-        
+        // console.log(value);
         let condition = "pt.hn = ?";
-        if(value.param.length > 9) condition = "pt.cid = ?";
+        let trem = value;        
+        if(value.length > 9){
+            condition = "pt.cid = ?";
+        }else{            
+            trem = value.padStart(9, '0')
+        }
         return new Promise((resolve, reject)=>{
             const sql = `            
             SELECT 
                 CONCAT(pt.pname, pt.fname, ' ', pt.lname) as fullname, 
-                pt.cid,
+                pt.cid, pt.sex,
                 vn.vstdate,  
                 lh.lab_order_number, 
                 lh.vn, 
@@ -79,7 +87,9 @@ module.exports = {
             WHERE ${condition}
             ORDER BY vn.vstdate DESC
             `;
-            connection.query(sql,[value.param],(error, results)=>{
+            console.log(sql);
+            
+            connection.query(sql,[trem],(error, results)=>{
                 if (error) {
                     console.error('Error executing lab order query:', error);
                     return reject(error);
