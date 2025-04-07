@@ -4,6 +4,11 @@
 <br>
 Mobile menu nodejs version 16
 </br>
+</br>
+#ติดตั้ง Angular CLI เวอร์ชัน 13 แบบ global
+</br>
+npm uninstall -g @angular/cli  # ลบ CLI เวอร์ชันปัจจุบัน</br>
+npm install -g @angular/cli@13  # ติดตั้ง CLI เวอร์ชัน 13</br>
 mysql workbench 6.3 ce <br>
 
 <div style="width:100%">
