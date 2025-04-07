@@ -1,0 +1,67 @@
+.mat-elevation-z4{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+mat-grid-tile {
+    background: lightblue;
+  }
+  mat-card{
+    height: 90vh;
+    overflow: scroll;
+  }
+  mat-list-item{
+    cursor: pointer;
+    transition: color 0.3s ease;
+  }
+  mat-list-item:hover{
+    background-color: #3f51b5;
+    color: aliceblue;
+  }
+
+  .container{
+    display: flex; 
+    justify-content: flex-start;
+    width: 100wh;   
+  }
+  .item-left{
+    /* background-color: antiquewhite; */
+    width: 200px;
+    height: 87vh;
+    overflow: scroll;
+  }
+  .item-content{
+    /* background-color: aqua; */
+    width: 100%;
+    margin-left: 5px;
+  }
+  table {
+    width: 100%;
+  }
+
+  /* lab-results.component.css */
+.lab-results-container {
+    padding: 20px;
+  }
+  
+  mat-table {
+    width: 100%;
+    margin-top: 20px;
+  }
+  
+  mat-header-cell {
+    font-weight: bold;
+    background-color: #f5f5f5;
+  }
+  
+  .abnormal {
+    color: red;
+    font-weight: bold;
+  }
+  
+  /* ทำให้แถวมี hover effect */
+  mat-row:hover {
+    background-color: #f5f5f5;
+    cursor: pointer;
+  }

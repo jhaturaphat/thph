@@ -11,14 +11,12 @@ import { LoginComponent } from './componentes/login/login.component';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthenInterceptor } from './services/authen.interceptor';
 import { HisModule } from './shared/modules/his.module';
-import { APP_BASE_HREF } from '@angular/common';
-
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,

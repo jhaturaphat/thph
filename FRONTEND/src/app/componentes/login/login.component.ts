@@ -35,7 +35,7 @@ export class LoginComponent implements OnInit {
     console.log(this.fg.value);
     this.login.onLogin(this.fg.value).then((res:any) => {                                      
           this.login.setToken(res.token);     
-          this.router.navigate(['/', AppUrl.Labview]);
+          this.router.navigate(['/', AppUrl.ducph]);
       }
   ).catch((err)=>{    
       this.alert.openSnackBar(err.error.message);

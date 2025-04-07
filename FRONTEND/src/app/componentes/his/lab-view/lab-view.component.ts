@@ -15,6 +15,8 @@ import * as XLSX from 'xlsx';
 export class LabViewComponent implements OnInit {
 
   public loading: boolean = false;
+  progressMode: 'determinate' | 'indeterminate' | 'buffer' | 'query' = 'determinate';
+  color = 'primary';
   myForm:FormGroup;  
   labResult:ILabview[] = [];
 
@@ -39,9 +41,12 @@ export class LabViewComponent implements OnInit {
  
   async labReport(){
     this.loading = true;
+    this.progressMode = 'indeterminate';
+    this.color = 'accent';
       
     if(!this.myForm.value['lab_start_date']){
       this.loading = false;
+      this.progressMode = 'determinate';
       this.router.navigate(['login']);
       return;
     } 
@@ -53,15 +58,21 @@ export class LabViewComponent implements OnInit {
     console.log("start_date ",start_date, "end_date ", end_date);  
     
     await this.labService.find(start_date, end_date).then(res => {
-      this.loading = false;
+      // this.loading = false;
+      // this.progressMode = 'determinate';
       this.labResult = res;
       console.log(this.labResult);      
     }).catch (err => {
-      this.loading = false; 
+      // this.loading = false; 
+      // this.progressMode = 'determinate';
       this.alert.openSnackBar(err.error.message);
       // alert(err.error.message);     
       console.log(err);      
-    });    
+    }).finally(() => {
+      this.loading = false;
+      this.progressMode = 'determinate';  
+      this.color = 'primary';
+    })   
   }
 
   cancelReport():void {

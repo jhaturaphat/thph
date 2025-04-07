@@ -15,10 +15,16 @@ export class HisLabService{
         this.apiURL = environment.url + '/his/lab';
     }
 
-    
-
     find(lab_start_date:any, lab_end_date:any){
         return lastValueFrom(this.http.post(this.apiURL+'/lab-view', {lab_start_date, lab_end_date})) as Promise<ILabview[]>            
+    }
+
+    findLabOrder(param:any){
+        return lastValueFrom(this.http.post(this.apiURL+'/lab-order',{param})) as Promise<any>;
+    }
+
+    findLabResult(id:string){
+        return lastValueFrom(this.http.post(this.apiURL+'/lab-result',{id})) as Promise<any>;
     }
     
 }

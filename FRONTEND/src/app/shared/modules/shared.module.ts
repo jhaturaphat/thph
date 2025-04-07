@@ -33,6 +33,8 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatSortModule} from '@angular/material/sort';
 import {MatTableModule} from '@angular/material/table';
 import {MatSelectModule} from '@angular/material/select';
+import {MatTabsModule} from '@angular/material/tabs';
+import {MatProgressBarModule} from '@angular/material/progress-bar';
 
 // Components
 import { ContentComponent } from '../layout/content/content.component';
@@ -81,6 +83,8 @@ import { DashboardComponent } from 'src/app/componentes/dashboard/dashboard.comp
         MatSortModule,
         MatTableModule,
         MatSelectModule,
+        MatTabsModule,
+        MatProgressBarModule,
         
         // Module Angular
         ReactiveFormsModule,        
@@ -112,6 +116,8 @@ import { DashboardComponent } from 'src/app/componentes/dashboard/dashboard.comp
         MatSortModule,
         MatTableModule,    
         MatSelectModule,
+        MatTabsModule,
+        MatProgressBarModule,
         
         // Module Angular
         ReactiveFormsModule,        

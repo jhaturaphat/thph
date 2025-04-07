@@ -18,7 +18,7 @@ const routes: Routes = [
     loadChildren: () => import('./shared/modules/his.module').then(m=>m.HisModule)
   },
   {
-    path:AppUrl.Labview,
+    path:AppUrl.ducph,
     loadChildren: () => import('./shared/modules/his.module').then(m=>m.HisModule)
   },  
 ];

@@ -1,0 +1,73 @@
+<app-content-his>
+
+    <mat-toolbar class="mat-elevation-z4" color="primary">
+        <h1>ประวัติการสั่ง LAB</h1>
+        <form class="example-form">
+            <mat-form-field class="example-full-width">
+              <mat-label>พิมพ์ค้นหา HN , CID</mat-label>
+              <input matInput placeholder="Ex. Pizza" value="">
+              <mat-icon matSuffix>search</mat-icon>
+            </mat-form-field>          
+           
+          </form>
+    </mat-toolbar>
+    <mat-progress-bar mode="determinate"></mat-progress-bar>
+
+    <mat-card>
+        <mat-card-content>
+            <div class="container">
+                <div class="item-left">
+                    <mat-list role="list">
+                        <mat-list-item *ngFor="let item of labOrders; let i = index" role="listitem" 
+                        (click)="findLabItem($event,item.lab_order_number, i )"
+                        >
+                            {{item.vstdate | date:'yyyy-MM-dd':'UTC':'en-US'}}
+                            <mat-divider></mat-divider>
+                          </mat-list-item>
+                            
+                      </mat-list>                      
+                </div>
+                <div class="item-content">
+
+                    <div class="lab-results-container">
+                        <h2>ผลการตรวจแล็บ {{fullname}}</h2>
+                        
+                        <mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+                          <!-- ชื่อการตรวจ -->
+                          <ng-container matColumnDef="lab_items_name">
+                            <mat-header-cell *matHeaderCellDef> การตรวจ </mat-header-cell>
+                            <mat-cell *matCellDef="let item"> {{item.lab_items_name}} </mat-cell>
+                          </ng-container>
+                          
+                          <!-- ผลการตรวจ -->
+                          <ng-container matColumnDef="lab_order_result">
+                            <mat-header-cell *matHeaderCellDef> ผลตรวจ </mat-header-cell>
+                            <mat-cell *matCellDef="let item"> 
+                              <span [class.abnormal]="isAbnormalResult(item)">
+                                {{item.lab_order_result}}
+                              </span>
+                            </mat-cell>
+                          </ng-container>
+                          
+                          <!-- ค่าปกติ -->
+                          <ng-container matColumnDef="lab_items_normal_value">
+                            <mat-header-cell *matHeaderCellDef> ค่าปกติ </mat-header-cell>
+                            <mat-cell *matCellDef="let item"> {{item.lab_items_normal_value}} </mat-cell>
+                          </ng-container>
+                          
+                          <!-- กลุ่มการตรวจ -->
+                          <ng-container matColumnDef="lab_items_group_name">
+                            <mat-header-cell *matHeaderCellDef> กลุ่ม </mat-header-cell>
+                            <mat-cell *matCellDef="let item"> {{item.lab_items_group_name}} </mat-cell>
+                          </ng-container>
+                          
+                          <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                          <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+                        </mat-table>
+                      </div>
+
+                </div>
+            </div>
+        </mat-card-content>
+    </mat-card>
+</app-content-his>

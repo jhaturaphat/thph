@@ -2,7 +2,7 @@
     <mat-toolbar class="footer" color="primary">
       <div fxFlex fxLayout="row" fxLayoutAlign="space-between center">
     
-        <button mat-button routerLink="/his" routerLinkActive="active-menu-item">
+        <button mat-button routerLink="/ducph" routerLinkActive="active-menu-item">
           <div class="toolbar-icon">
             <mat-icon>collections</mat-icon>
           </div>
@@ -11,7 +11,7 @@
           </div>
         </button>
 
-        <button mat-button routerLink="/his/lab-view" routerLinkActive="active-menu-item">
+        <button mat-button routerLink="/ducph/lab-history" routerLinkActive="active-menu-item">
           <div class="toolbar-icon">
           <mat-icon aria-hidden="false" aria-label="Example home icon">science</mat-icon>
           </div>
@@ -20,7 +20,7 @@
           </div>
         </button>
     
-        <button mat-button (click)="onToggleSidenav()">
+        <button mat-button (click)="onToggleSidenav()" routerLinkActive="active-menu-item">
           <div class="toolbar-icon">
             <mat-icon>more_horiz</mat-icon>
           </div>

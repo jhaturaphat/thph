@@ -6,6 +6,7 @@ import { ContentHisComponent } from "../layout-his/content-his/content-his.compo
 import { FooterMenuHisComponent } from "../layout-his/footer-menu-his/footer-menu-his.component";
 import { SideBarHisComponent } from "../layout-his/side-bar-his/side-bar-his.component";
 import { LabViewComponent } from "src/app/componentes/his/lab-view/lab-view.component";
+import { LabHistoryComponent } from "src/app/componentes/his/lab-history/lab-history.component";
 
 
 @NgModule({
@@ -15,7 +16,8 @@ import { LabViewComponent } from "src/app/componentes/his/lab-view/lab-view.comp
     FooterMenuHisComponent,
     SideBarHisComponent,
     //Components
-    LabViewComponent
+    LabViewComponent,
+    LabHistoryComponent
   ],
   imports: [
     CommonModule,
@@ -24,11 +26,12 @@ import { LabViewComponent } from "src/app/componentes/his/lab-view/lab-view.comp
   ],
   exports: [
     // SharedModule,
-    // // Component
+    // Component
     ContentHisComponent,
     FooterMenuHisComponent,
     SideBarHisComponent,
-    LabViewComponent
+    LabViewComponent,
+    LabHistoryComponent
   ]
 })
 export class HisModule { }
