@@ -1,6 +1,6 @@
 const route = require('express').Router();
 const {check} = require('express-validator');
-const {onFind, onFindLabOrder, onFindLabResult} = require('../services/lab.service');
+const {onFind, onFindLabOrder, onFindLabResult, onFindVisit} = require('../services/lab.service');
 const authorize = require("../middleware/middleware.authorization");
 
 const role = ["create","read","update","delete"];
@@ -35,6 +35,13 @@ route.post('/lab-result',(authorize(role)),[
         console.log(ex);  
         res.error(ex);
     }
+});
+
+router.post('/visit-list',(authorize(role)),[
+    check('id').not().isEmpty()
+], async (req, res)=> {
+    req.validate();
+    res.json(await onFindVisit(req.body.id));
 });
 
 module.exports = route;

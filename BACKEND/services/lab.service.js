@@ -7,17 +7,14 @@ module.exports = {
         return hn.padStart(9, '0');
     },
     async onFind (value){        
-        // return new Promise(async (resolve, reject)=>{ 
+        
             const start_date = value['lab_start_date'];
             const end_date = value['lab_end_date'];
             const stepDays = 1;
-
-            console.log(start_date, ' ถึง ', end_date);
-            // return resolve(true);
-
+            // console.log(start_date, ' ถึง ', end_date); 
             const diffInMs = new Date(end_date) - new Date(start_date);
             const diffDays = diffInMs / (1000 * 60 * 60 * 24);
-
+            
             if(diffDays > 32) return new Promise((resolve, reject) => {
                 reject({message:"ช่วงการดึงข้อมูลมากกว่า 31 วัน"});
             });
@@ -46,13 +43,60 @@ module.exports = {
                 //connection.end(); // ปิด Connection Pool                
             } 
 
-            //console.log(sql);
-            // connection.query(sql,[start_date, end_date], (error, result)=>{                 
-            //     if(error) return reject(error);                  
-            //     resolve(result);
-            // });            
-        // })
     },
+
+    onFindVisit(hn){
+        if(!hn) return Promise.reject(new Error('Parameter is required'));
+        
+        let trem = hn;   
+        let condition = "pt.hn = ?";     
+        if(trem.length > 9){
+            // กำหนดเขื่อนไขให้ค้นหาจาก CID
+            condition = "pt.cid = ?";
+        }else{      
+            //ใส่่ 000000000 หน้า HN ให้ครบ 9 หลัก     
+            trem = hn.padStart(9, '0')
+        }
+        return new Promise((resole, reject) => {
+            sql = `
+            SELECT 
+            CONCAT(pt.pname, pt.fname, ' ', pt.lname) as fullname
+            ,pt.hn, vn.vn, vn.vstdate 
+            FROM vn_stat as vn 
+            INNER JOIN patient as pt ON vn.hn = pt.hn
+            WHERE ${condition}
+            `;
+            //ใส่่ 000000000 หน้า HN ให้ครบ 9 หลัก hn.padStart(9, '0')
+            connection.query(sql,[trem],(error, results)=>{
+                if (error) {
+                    console.error('Error executing lab order query:', error);
+                    return reject(error);
+                }
+                resolve(results);
+            });
+        });
+    },
+
+    onLabHead(vn){
+        if(!vn) return Promise.reject(new Error('Parameter is required'));
+        sql = `SELECT 
+        lab_order_number,
+        CONCAT(lh.order_date, ' ', lh.order_time) as order_date, 
+        CONCAT(lh.receive_date, ' ', lh.receive_time) as receive_date, 
+        CONCAT(lh.report_date, ' ', lh.report_time) as report_date, 
+        lh.confirm_report, 
+        lh.form_name, 
+        lh.is_outlab
+        FROM lab_head as lh WHERE lh.vn = '670801060258';`;
+        connection.query(sql,[vn],(error, results)=>{
+            if (error) {
+                console.error('Error executing lab order query:', error);
+                return reject(error);
+            }
+            resolve(results);
+        });
+    },
+
     onFindLabOrder(value){
                 
         if (!value) {

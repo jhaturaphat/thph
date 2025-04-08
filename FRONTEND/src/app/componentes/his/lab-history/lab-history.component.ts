@@ -44,7 +44,7 @@ export class LabHistoryComponent implements OnInit {
 
   findKeyword(event: Event): void{
     const keysearch = this.Fsearch.value['keyword'];
-    this.labService.findLabOrder(keysearch)
+    this.labService.findVisitList(keysearch)
     .then((result) => {
       console.log(result);
       this.labOrders = result;

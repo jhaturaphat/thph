@@ -19,6 +19,10 @@ export class HisLabService{
         return lastValueFrom(this.http.post(this.apiURL+'/lab-view', {lab_start_date, lab_end_date})) as Promise<ILabview[]>            
     }
 
+    findVisitList(id:any){
+        return lastValueFrom(this.http.post(this.apiURL+'/visit-list',{id})) as Promise<any>;
+    }
+
     findLabOrder(param:any){
         return lastValueFrom(this.http.post(this.apiURL+'/lab-order',{param})) as Promise<any>;
     }
