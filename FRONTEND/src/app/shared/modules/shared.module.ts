@@ -41,6 +41,7 @@ import { ContentComponent } from '../layout/content/content.component';
 import { FooterMenuComponent } from '../layout/footer-menu/footer-menu.component';
 import { SideBarComponent } from '../layout/side-bar/side-bar.component';
 import { DashboardComponent } from 'src/app/componentes/dashboard/dashboard.component';
+import { ThaiDatePipe } from 'src/app/pipe/thai-date-pipe';
 //layout-his
 // import { ContentHisComponent } from '../layout-his/content-his/content-his.component';
 // import { FooterMenuHisComponent } from '../layout-his/footer-menu-his/footer-menu-his.component';
@@ -54,7 +55,9 @@ import { DashboardComponent } from 'src/app/componentes/dashboard/dashboard.comp
         FooterMenuComponent,
         SideBarComponent,        
         //Component
-        DashboardComponent    
+        DashboardComponent,
+        //Pipe
+        ThaiDatePipe   
     ],
     imports: [        
         RouterModule,
@@ -127,6 +130,9 @@ import { DashboardComponent } from 'src/app/componentes/dashboard/dashboard.comp
         SideBarComponent,
         DashboardComponent,
         //HIS
+
+        //Pipe
+        ThaiDatePipe 
     ],
     providers: [       
         {provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: {appearance: 'fill'}},

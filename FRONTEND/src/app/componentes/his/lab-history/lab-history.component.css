@@ -16,13 +16,13 @@ mat-grid-tile {
     height: 90vh;
     overflow: scroll;
   }
-  mat-list-item{
+  mat-list-item{    
     cursor: pointer;
     transition: color 0.3s ease;
   }
-  mat-list-item:hover{
-    background-color: #3f51b5;
-    color: aliceblue;
+  mat-list-item:hover,mat-list-item:hover>small {
+    background-color: #3f51b5 !important;
+    color: aliceblue !important;
   }
   .ActiveList{
     background-color: #3f51b5;
@@ -32,11 +32,17 @@ mat-grid-tile {
     cursor: pointer;
   }
 
-  .container{
+   .container{
     display: flex; 
     justify-content: flex-start;
     width: 100wh;   
   }
+  .vsttime{
+    color: #3f51b5;
+    border-radius: 15px;
+    background-color: aqua;
+    padding: 2px;
+  }  
   .item-left{
     /* background-color: antiquewhite; */
     width: 230px;

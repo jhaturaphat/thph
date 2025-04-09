@@ -13,10 +13,12 @@ import { AuthenInterceptor } from './services/authen.interceptor';
 import { HisModule } from './shared/modules/his.module';
 
 
+
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent
+    LoginComponent,
+    
   ],
   imports: [
     BrowserModule,

@@ -22,7 +22,7 @@
                         (click)="LabHead($event,item.vn, i )"     
                         [class.ActiveList]="selectedIndex === i"                   
                         >
-                            {{item.vstdate}}|<small>{{item.vsttime}}</small>
+                            {{item.vstdate | thaiDate:'short'}}<small class="vsttime">{{item.vsttime}}</small>
                             <mat-divider></mat-divider>
                           </mat-list-item>
                             
