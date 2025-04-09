@@ -42,7 +42,7 @@ export class LabHistoryComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  findKeyword(event: Event): void{
+  VisitList(event: Event): void{
     const keysearch = this.Fsearch.value['keyword'];
     this.labService.findVisitList(keysearch)
     .then((result) => {
@@ -52,23 +52,15 @@ export class LabHistoryComponent implements OnInit {
     })
     .catch(err => console.log(err))
     .finally(()=>{
-      if(this.labOrders){
-        this.labService.findLabResult(this.labOrders[0].lab_order_number).then((result) => {      
-          this.dataSource = result;
-        }).catch(err => { console.log(err) })
-          .finally();
-      }
+      
     })
     
   }
 
-  findLabItem(event: Event, item: string, index: number): void {
-    event.preventDefault();
-    // this.ActiveList = !this.ActiveList;
-    // console.log(event.target);
-    // อัปเดต selectedIndex เป็น index ของรายการที่ถูกคลิก
+  LabHead(event: Event, item: string, index: number): void {
+    event.preventDefault();    
     this.selectedIndex = index;
-    this.labService.findLabResult(item).then((result) => {      
+    this.labService.findLabHead(item).then((result) => {      
       this.dataSource = result;
     }).catch(err => { console.log(err) })
       .finally();
@@ -100,7 +92,7 @@ export class LabHistoryComponent implements OnInit {
   handleEnter(event: KeyboardEvent): void {
     if (this.Fsearch.valid) {      
       event.preventDefault(); // ป้องกันการ submit form หากไม่ต้องการ
-      this.findKeyword(event);
+      this.VisitList(event);
       //console.log(this.Fsearch.value);
       
     }

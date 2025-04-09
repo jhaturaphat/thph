@@ -18,7 +18,7 @@ route.post('/',[
     }    
 });
 
-route.post('/reqlogin',(authorize(role)),[] ,async (req, res)=>{
+route.post('/login',(authorize(role)),[] ,async (req, res)=>{
     try {        
         res.json({"ok":true});
     } catch (ex) {                

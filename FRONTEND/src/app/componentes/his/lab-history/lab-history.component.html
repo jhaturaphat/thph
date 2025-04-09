@@ -5,8 +5,8 @@
         <form class="example-form" [formGroup]="Fsearch">
             <mat-form-field class="example-full-width">
               <mat-label>พิมพ์ค้นหา HN , CID</mat-label>
-              <input matInput  formControlName="keyword" [(ngModel)]="value" appEnterKey (enterKey)="findKeyword($event)">
-              <mat-icon matSuffix (click)="findKeyword($event)">search</mat-icon>             
+              <input matInput  formControlName="keyword" [(ngModel)]="value" appEnterKey (enterKey)="VisitList($event)">
+              <mat-icon matSuffix (click)="VisitList($event)">search</mat-icon>             
             </mat-form-field>  
         </form>
     </mat-toolbar>
@@ -19,10 +19,10 @@
                     <mat-list role="list">
                         <mat-list-item *ngFor="let item of labOrders; let i = index" 
                         role="listitem" 
-                        (click)="findLabItem($event,item.lab_order_number, i )"     
+                        (click)="LabHead($event,item.vn, i )"     
                         [class.ActiveList]="selectedIndex === i"                   
                         >
-                            {{item.vstdate | date:'yyyy-MM-dd':'UTC':'en-US'}}
+                            {{item.vstdate}}|<small>{{item.vsttime}}</small>
                             <mat-divider></mat-divider>
                           </mat-list-item>
                             

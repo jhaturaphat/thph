@@ -39,7 +39,7 @@ mat-grid-tile {
   }
   .item-left{
     /* background-color: antiquewhite; */
-    width: 200px;
+    width: 230px;
     height: 80vh;
     overflow: scroll;
     margin-top: 50px;

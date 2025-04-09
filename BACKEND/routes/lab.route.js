@@ -1,6 +1,6 @@
 const route = require('express').Router();
 const {check} = require('express-validator');
-const {onFind, onFindLabOrder, onFindLabResult, onFindVisit} = require('../services/lab.service');
+const {onFind, onFindLabOrder, onFindLabResult, onFindVisitList, onFindLabHead} = require('../services/lab.service');
 const authorize = require("../middleware/middleware.authorization");
 
 const role = ["create","read","update","delete"];
@@ -19,10 +19,10 @@ route.post('/lab-view',(authorize(role)),[
 });
 // ดูวันที่สั่ง LAB
 route.post('/lab-order', (authorize(role)),[
-    check('param').not().isEmpty(),
+    check('oid').not().isEmpty(),
 ], async (req, res)=>{
     req.validate();
-    res.json(await onFindLabOrder(req.body.param));
+    res.json(await onFindLabOrder(req.body.oid));
 });
 // ดูรายการปล LAB
 route.post('/lab-result',(authorize(role)),[
@@ -37,11 +37,18 @@ route.post('/lab-result',(authorize(role)),[
     }
 });
 
-router.post('/visit-list',(authorize(role)),[
-    check('id').not().isEmpty()
+route.post('/visit-list',(authorize(role)),[
+    check('hn').not().isEmpty(),
 ], async (req, res)=> {
     req.validate();
-    res.json(await onFindVisit(req.body.id));
+    res.json(await onFindVisitList(req.body.hn));
+});
+
+route.post('/lab-head',(authorize(role)),[
+    check('vn').not().isEmpty(),
+], async (req, res)=> {
+    req.validate();
+    res.json(await onFindLabHead(req.body.vn));
 });
 
 module.exports = route;

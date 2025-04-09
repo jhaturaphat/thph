@@ -45,8 +45,8 @@ module.exports = {
 
     },
 
-    onFindVisit(hn){
-        if(!hn) return Promise.reject(new Error('Parameter is required'));
+    onFindVisitList(hn){
+        if(!hn) return Promise.reject(new Error('HN:Parameter is required'));
         
         let trem = hn;   
         let condition = "pt.hn = ?";     
@@ -57,17 +57,48 @@ module.exports = {
             //ใส่่ 000000000 หน้า HN ให้ครบ 9 หลัก     
             trem = hn.padStart(9, '0')
         }
-        return new Promise((resole, reject) => {
+        return new Promise((resolve, reject) => {
             sql = `
             SELECT 
             CONCAT(pt.pname, pt.fname, ' ', pt.lname) as fullname
-            ,pt.hn, vn.vn, vn.vstdate 
+            ,pt.hn, vn.vn
+            ,DATE_FORMAT(vn.vstdate, '%Y-%m-%d') AS vstdate
+            ,ov.vsttime
             FROM vn_stat as vn 
             INNER JOIN patient as pt ON vn.hn = pt.hn
+            INNER JOIN ovst as ov ON vn.vn = ov.vn
             WHERE ${condition}
+            ORDER BY vn.vn DESC
             `;
-            //ใส่่ 000000000 หน้า HN ให้ครบ 9 หลัก hn.padStart(9, '0')
+           
             connection.query(sql,[trem],(error, results)=>{
+                if (error) {
+                    console.error('Error executing lab order query:', error);
+                    return reject(error);
+                }
+                // console.log(results);                
+                resolve(results);
+            });
+        });
+    },
+
+    onFindLabHead(vn){
+        if(!vn) return Promise.reject(new Error('VN:Parameter is required'));
+
+        sql = `
+        SELECT 
+        lab_order_number,
+        CONCAT(lh.order_date, ' ', lh.order_time) as order_date, 
+        CONCAT(lh.receive_date, ' ', lh.receive_time) as receive_date, 
+        CONCAT(lh.report_date, ' ', lh.report_time) as report_date, 
+        lh.confirm_report, 
+        lh.form_name, 
+        lh.is_outlab
+        FROM lab_head as lh 
+        WHERE lh.vn = ?
+        `;
+        return new Promise((resolve, reject)=>{
+            connection.query(sql,[vn],(error, results)=>{
                 if (error) {
                     console.error('Error executing lab order query:', error);
                     return reject(error);
@@ -77,63 +108,26 @@ module.exports = {
         });
     },
 
-    onLabHead(vn){
-        if(!vn) return Promise.reject(new Error('Parameter is required'));
-        sql = `SELECT 
-        lab_order_number,
-        CONCAT(lh.order_date, ' ', lh.order_time) as order_date, 
-        CONCAT(lh.receive_date, ' ', lh.receive_time) as receive_date, 
-        CONCAT(lh.report_date, ' ', lh.report_time) as report_date, 
-        lh.confirm_report, 
-        lh.form_name, 
-        lh.is_outlab
-        FROM lab_head as lh WHERE lh.vn = '670801060258';`;
-        connection.query(sql,[vn],(error, results)=>{
-            if (error) {
-                console.error('Error executing lab order query:', error);
-                return reject(error);
-            }
-            resolve(results);
-        });
-    },
-
-    onFindLabOrder(value){
+    onFindLabOrder(oid){
                 
-        if (!value) {
-            return Promise.reject(new Error('Parameter is required'));
+        if (!oid) {
+            return Promise.reject(new Error('Lab order number:Parameter is required'));
         }
-        // console.log(value);
-        let condition = "pt.hn = ?";
-        let trem = value;        
-        if(value.length > 9){
-            condition = "pt.cid = ?";
-        }else{            
-            trem = value.padStart(9, '0')
-        }
+        
         return new Promise((resolve, reject)=>{
             const sql = `            
-            SELECT 
-                CONCAT(pt.pname, pt.fname, ' ', pt.lname) as fullname, 
-                pt.cid, pt.sex,
-                vn.vstdate,  
-                lh.lab_order_number, 
-                lh.vn, 
-                lh.hn, 
-                CONCAT(lh.order_date, ' ', lh.order_time) as order_date, 
-                CONCAT(lh.receive_date, ' ', lh.receive_time) as receive_date, 
-                CONCAT(lh.report_date, ' ', lh.report_time) as report_date, 
-                lh.confirm_report, 
-                lh.form_name, 
-                lh.is_outlab
-            FROM vn_stat as vn
-            INNER JOIN lab_head as lh ON vn.vn = lh.vn
-            INNER JOIN patient as pt ON pt.hn = lh.hn
-            WHERE ${condition}
-            ORDER BY vn.vstdate DESC
+            SELECT  
+             lo.lab_order_number
+            ,lo.lab_items_name_ref
+            ,IF(lo.lab_items_code = '68' AND lo.lab_order_result = 'Positive', 'Secret level',  lo.lab_order_result) as lab_order_result
+            ,lo.lab_items_normal_value_ref
+            ,lo.abnormal_result
+            ,lo.confirm
+            FROM lab_order as lo WHERE lo.lab_order_number = ?;
             `;
             console.log(sql);
             
-            connection.query(sql,[trem],(error, results)=>{
+            connection.query(sql,[oid],(error, results)=>{
                 if (error) {
                     console.error('Error executing lab order query:', error);
                     return reject(error);

@@ -30,13 +30,13 @@ module.exports = {
             });
         })
     },
-    onLoginAttempts(value){
+    onLoginAttempts(value){               
         return new Promise((resolve, reject) => {           
             connection.query("SELECT userid, pass, login_attempts, lock_until FROM tambonservice WHERE userid = ?", [ value['userid'] ], (error, result) => {
                 if(error) {
                     return reject(error);
                 }
-    
+                
                 // ถ้าพบว่าไม่มี user นี้อยู่ในระบบ
                 if(result.length === 0) {
                     return reject({message:"Username or password is invalid"});
@@ -78,7 +78,7 @@ module.exports = {
                             scopes: ["read"]
                         };
     
-                        const token = jwt.sign(payload, process.env.SECRET_KEY, {expiresIn:"1h"}); 
+                        const token = jwt.sign(payload, process.env.SECRET_KEY, {expiresIn:"4h"}); 
                         const access_token = { token };
                         return resolve(access_token);
                     });
