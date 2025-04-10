@@ -19,4 +19,12 @@ export class AlertService {
       duration: 4000,      
     });
   }
+
+  openSnackBarEnd(text:string):any {
+    return this.snackBar.open(text, 'X', {
+      horizontalPosition: "end",
+      verticalPosition: "top",
+      duration: 4000,      
+    });
+  }
 }

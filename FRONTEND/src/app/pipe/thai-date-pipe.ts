@@ -7,8 +7,9 @@ export class ThaiDatePipe implements PipeTransform {
   transform(value: Date | string, format: string = 'medium'): string {
     const date = typeof value === 'string' ? new Date(value) : value;
     
-    if (!(date instanceof Date) || isNaN(date.getTime())) {
-      return 'วันที่ไม่ถูกต้อง';
+    if (!(date instanceof Date) || isNaN(date.getTime())) {            
+      //return 'วันที่ไม่ถูกต้อง';   
+      return "";   
     }
 
     const options: Intl.DateTimeFormatOptions = {};

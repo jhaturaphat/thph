@@ -44,6 +44,7 @@ route.post('/visit-list',(authorize(role)),[
     res.json(await onFindVisitList(req.body.hn));
 });
 
+
 route.post('/lab-head',(authorize(role)),[
     check('vn').not().isEmpty(),
 ], async (req, res)=> {

@@ -24,12 +24,12 @@ module.exports = {
             ,ops.height, ops.bw
             ,ops.bmi as 'bmi',ops.bps as "SysBP", ops.bpd as "DiasBP"
             #,ops.cc, ops.hpi
-            ,h.order_date
+            ,DATE_FORMAT(h.order_date,'%Y-%m-%d') as order_date
             #,k.department
             #,w.name as 'WARD_NAME'
-            ,h.receive_date,h.receive_time
-            ,h.report_date,h.report_time
-            ,h.report_date as 'approve_date'
+            ,DATE_FORMAT(h.receive_date,'%Y-%m-%d') as receive_date,h.receive_time
+            ,DATE_FORMAT(h.report_date,'%Y-%m-%d') as report_date,h.report_time
+            ,DATE_FORMAT(h.report_date,'%Y-%m-%d') as 'approve_date'
 
             from lab_head h
 

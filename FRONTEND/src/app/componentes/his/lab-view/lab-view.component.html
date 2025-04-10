@@ -87,12 +87,12 @@
                 <td>{{item.bmi}}</td>
                 <td>{{item.SysBP}}</td>
                 <td>{{item.DiasBP}}</td>
-                <td>{{item.order_date}}</td>
-                <td>{{item.receive_date}}</td>
+                <td>{{item.order_date | thaiDate:'short'}}</td>
+                <td>{{item.receive_date | thaiDate:'short'}}</td>
                 <td>{{item.receive_time}}</td>
-                <td>{{item.report_date}}</td>
+                <td>{{item.report_date | thaiDate:'short'}}</td>
                 <td>{{item.report_time}}</td>
-                <td>{{item.approve_date}}</td>
+                <td>{{item.approve_date | thaiDate:'short'}}</td>
                 <td>{{item.HbA1C}}</td>
                 <td>{{item.Creatinine}}</td>
                 <td>{{item.eGFR}}</td>

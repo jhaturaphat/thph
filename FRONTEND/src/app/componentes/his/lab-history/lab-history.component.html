@@ -15,56 +15,62 @@
     <mat-card>
         <mat-card-content>
             <div class="container">
+              <!-- Items Visit List -->
                 <div class="item-left">
                     <mat-list role="list">
-                        <mat-list-item *ngFor="let item of labOrders; let i = index" 
+                        <mat-list-item *ngFor="let item of DataVisitList; let i = index" 
                         role="listitem" 
                         (click)="LabHead($event,item.vn, i )"     
                         [class.ActiveList]="selectedIndex === i"                   
                         >
-                            {{item.vstdate | thaiDate:'short'}}<small class="vsttime">{{item.vsttime}}</small>
+                            {{item.vstdate | thaiDate:'short'}} &nbsp;<small>{{item.vsttime}}</small>
+                            <mat-icon *ngIf="item.status === 'Y'" color="accent" matListItemIcon>science</mat-icon>
                             <mat-divider></mat-divider>
                           </mat-list-item>
                             
                       </mat-list>                      
                 </div>
-                <div class="item-content">
 
+                <!-- Data List Tables -->
+                <div class="item-content">                  
+                  
                     <div class="lab-results-container">
-                        <h2>ผลการตรวจแล็บ {{fullname}}</h2>
+                        <h2>ผลการตรวจแล็บ {{fullname}}</h2>   
+                        <mat-tab-group mat-stretch-tabs="false" mat-align-tabs="start" (selectedTabChange)="onTabChanged($event) ">
+                          <!-- #Tabs -->
+                          <mat-tab *ngFor="let item of dataLabHead; let i = index" label="{{item.form_name}}">
+
+                            <!-- #table data -->
+                            <mat-table [dataSource]="labOrders" class="mat-elevation-z8">
+                              <!-- ชื่อการตรวจ -->
+                              <ng-container matColumnDef="lab_items_name_ref">
+                                <mat-header-cell *matHeaderCellDef> การตรวจ </mat-header-cell>
+                                <mat-cell *matCellDef="let item"> {{item.lab_items_name_ref || ""}} </mat-cell>
+                              </ng-container>
+                              
+                              <!-- ผลการตรวจ -->
+                              <ng-container matColumnDef="lab_order_result">
+                                <mat-header-cell *matHeaderCellDef> ผลตรวจ </mat-header-cell>
+                                <mat-cell *matCellDef="let item"> 
+                                  <span [class.abnormal]="isAbnormalResult(item)">
+                                    {{item.lab_order_result || ""}}
+                                  </span>
+                                </mat-cell>
+                              </ng-container>
+                              
+                              <!-- ค่าปกติ -->
+                              <ng-container matColumnDef="lab_items_normal_value_ref">
+                                <mat-header-cell *matHeaderCellDef> ค่าปกติ </mat-header-cell>
+                                <mat-cell *matCellDef="let item"> {{item.lab_items_normal_value_ref || ""}} </mat-cell>
+                              </ng-container>                              
+                              
+                              <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                              <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+                            </mat-table>
+                          </mat-tab>
+                         
+                        </mat-tab-group>
                         
-                        <mat-table [dataSource]="dataSource" class="mat-elevation-z8">
-                          <!-- ชื่อการตรวจ -->
-                          <ng-container matColumnDef="lab_items_name">
-                            <mat-header-cell *matHeaderCellDef> การตรวจ </mat-header-cell>
-                            <mat-cell *matCellDef="let item"> {{item.lab_items_name}} </mat-cell>
-                          </ng-container>
-                          
-                          <!-- ผลการตรวจ -->
-                          <ng-container matColumnDef="lab_order_result">
-                            <mat-header-cell *matHeaderCellDef> ผลตรวจ </mat-header-cell>
-                            <mat-cell *matCellDef="let item"> 
-                              <span [class.abnormal]="isAbnormalResult(item)">
-                                {{item.lab_order_result}}
-                              </span>
-                            </mat-cell>
-                          </ng-container>
-                          
-                          <!-- ค่าปกติ -->
-                          <ng-container matColumnDef="lab_items_normal_value">
-                            <mat-header-cell *matHeaderCellDef> ค่าปกติ </mat-header-cell>
-                            <mat-cell *matCellDef="let item"> {{item.lab_items_normal_value}} </mat-cell>
-                          </ng-container>
-                          
-                          <!-- กลุ่มการตรวจ -->
-                          <ng-container matColumnDef="lab_items_group_name">
-                            <mat-header-cell *matHeaderCellDef> กลุ่ม </mat-header-cell>
-                            <mat-cell *matCellDef="let item"> {{item.lab_items_group_name}} </mat-cell>
-                          </ng-container>
-                          
-                          <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-                          <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
-                        </mat-table>
                       </div>
 
                 </div>

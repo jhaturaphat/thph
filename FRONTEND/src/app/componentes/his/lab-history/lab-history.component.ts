@@ -1,5 +1,6 @@
 import { Component, OnInit, HostListener } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatTabChangeEvent } from '@angular/material/tabs';
 import { Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
 import { HisLabService } from 'src/app/services/his.lab.service';
@@ -13,6 +14,7 @@ import { AlertService } from 'src/app/shared/services/alert.service';
 
 export class LabHistoryComponent implements OnInit {
 
+
   selectedIndex: number = -1;
   Fsearch: FormGroup;
   fullname = "";
@@ -20,13 +22,13 @@ export class LabHistoryComponent implements OnInit {
   labItems$ = new BehaviorSubject([{ text: 'Item 1' }]);
   labOrders: any[] = [];
   // selectedIndex: number | null = null;
-  dataSource: any[] = []; // ข้อมูลที่จะแสดงในตาราง
+  dataLabHead: any[] = []; // ข้อมูลที่จะแสดงในตาราง
+  DataVisitList: any[] = [];
   value = '';
   displayedColumns: string[] = [
-    'lab_items_name',
+    'lab_items_name_ref',
     'lab_order_result',
-    'lab_items_normal_value',
-    'lab_items_group_name'
+    'lab_items_normal_value_ref'
   ];
 
   constructor(
@@ -46,8 +48,9 @@ export class LabHistoryComponent implements OnInit {
     const keysearch = this.Fsearch.value['keyword'];
     this.labService.findVisitList(keysearch)
     .then((result) => {
-      console.log(result);
-      this.labOrders = result;
+      // console.log(result);   
+      if(!result.length) return this.alert.openSnackBarEnd('ไม่พบข้อมูลที่ค้นหา');  
+      this.DataVisitList = result;
       this.fullname = "HN: " + result[0].hn + " ชื่อ-สกุล " + result[0].fullname;
     })
     .catch(err => console.log(err))
@@ -61,15 +64,34 @@ export class LabHistoryComponent implements OnInit {
     event.preventDefault();    
     this.selectedIndex = index;
     this.labService.findLabHead(item).then((result) => {      
-      this.dataSource = result;
+      this.dataLabHead = result;
     }).catch(err => { console.log(err) })
       .finally();
   }
 
+  onTabChanged(event: MatTabChangeEvent) {
+    console.log(event);
+    // ตรวจสอบว่า index อยู่ในช่วงของ array หรือไม่
+    if (event.index >= 0 && event.index < this.dataLabHead.length) {
+      const selectedItem = this.dataLabHead[event.index];
+      console.log('Lab Order Number:', selectedItem.lab_order_number);
+      this.fetchDataLabOrder(selectedItem.lab_order_number);
+    }   
+  }
 
+  fetchDataLabOrder(id:string): void{
+    this.labService.findLabOrder(id)
+    .then((result)=>{
+      this.labOrders = result;
+    })
+    .catch()
+    .finally()
+  }
+
+  // ตรวจสอบผลการตรวจว่าผิดปกติหรือไม่ 
   isAbnormalResult(item: any): boolean {
-    // ตรวจสอบผลการตรวจว่าผิดปกติหรือไม่ 
-    if (item.lab_items_normal_value && item.lab_order_result) {
+    
+    /*if (item.lab_items_normal_value && item.lab_order_result) {
       if (item.lab_items_normal_value.startsWith('<')) {
         const normalValue = parseFloat(item.lab_items_normal_value.substring(1));
         const resultValue = parseFloat(item.lab_order_result);
@@ -83,7 +105,10 @@ export class LabHistoryComponent implements OnInit {
       else if (item.lab_order_result !== item.lab_items_normal_value) {
         return true;
       }
-    }
+    }*/
+   if(item.abnormal_result === "Y"){
+    return true;
+   }
     return false;
   }
 

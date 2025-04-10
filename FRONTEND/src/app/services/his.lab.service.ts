@@ -27,8 +27,8 @@ export class HisLabService{
         return lastValueFrom(this.http.post(this.apiURL+'/lab-head',{vn})) as Promise<any>;
     }
 
-    findLabOrder(param:any){
-        return lastValueFrom(this.http.post(this.apiURL+'/lab-order',{param})) as Promise<any>;
+    findLabOrder(oid:string){
+        return lastValueFrom(this.http.post(this.apiURL+'/lab-order',{oid})) as Promise<any>;
     }    
 
     findLabResult(id:string){

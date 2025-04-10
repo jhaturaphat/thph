@@ -64,10 +64,13 @@ module.exports = {
             ,pt.hn, vn.vn
             ,DATE_FORMAT(vn.vstdate, '%Y-%m-%d') AS vstdate
             ,ov.vsttime
+            ,IF(lh.lab_order_number != "",'Y','N') as 'status'
             FROM vn_stat as vn 
             INNER JOIN patient as pt ON vn.hn = pt.hn
             INNER JOIN ovst as ov ON vn.vn = ov.vn
+            LEFT JOIN lab_head as lh ON vn.vn = lh.vn
             WHERE ${condition}
+            GROUP BY vn.vn
             ORDER BY vn.vn DESC
             `;
            
@@ -125,7 +128,7 @@ module.exports = {
             ,lo.confirm
             FROM lab_order as lo WHERE lo.lab_order_number = ?;
             `;
-            console.log(sql);
+            // console.log(sql);
             
             connection.query(sql,[oid],(error, results)=>{
                 if (error) {
