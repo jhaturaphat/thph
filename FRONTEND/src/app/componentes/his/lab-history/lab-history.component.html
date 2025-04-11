@@ -1,11 +1,11 @@
 <app-content-his>
 
     <mat-toolbar class="mat-elevation-z4" color="primary">
-        <h1>ประวัติการสั่งตรวจ LAB รพร.เดชอุดม</h1>
+        <h1>ประวัติทางห้องปฏิบัติการ รพร.เดชอุดม</h1>
         <form class="example-form" [formGroup]="Fsearch">
             <mat-form-field class="example-full-width">
               <mat-label>พิมพ์ค้นหา HN , CID</mat-label>
-              <input matInput  formControlName="keyword" [(ngModel)]="value" appEnterKey (enterKey)="VisitList($event)">
+              <input matInput  formControlName="keyword" [(ngModel)]="value" appEnterKey (enterKey)="VisitList($event)" type="text">
               <mat-icon matSuffix (click)="VisitList($event)">search</mat-icon>             
             </mat-form-field>  
         </form>

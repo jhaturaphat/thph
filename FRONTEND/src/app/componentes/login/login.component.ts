@@ -32,7 +32,7 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit(){
-    console.log(this.fg.value);
+    // console.log(this.fg.value);
     this.login.onLogin(this.fg.value).then((res:any) => {                                      
           this.login.setToken(res.token);     
           this.router.navigate(['/', AppUrl.ducph]);

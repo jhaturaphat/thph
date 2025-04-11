@@ -20,10 +20,10 @@ module.exports = {
             });
             // แบ่งช่วงเวลา
             const dateRanges = splitDateRange(start_date, end_date, stepDays);
-             console.log(dateRanges);
+            //  console.log(dateRanges);
            
             try {
-                console.log('Start fetching data');
+                // console.log('Start fetching data');
         
                 // ใช้ Promise.all เพื่อ Query ทุกช่วงเวลา
                 const results = await Promise.all(
@@ -61,6 +61,8 @@ module.exports = {
             sql = `
             SELECT 
             CONCAT(pt.pname, pt.fname, ' ', pt.lname) as fullname
+            ,IF(pt.sex = '1','ชาย','หญิง') as sex
+            ,vn.age_y
             ,pt.hn, vn.vn
             ,DATE_FORMAT(vn.vstdate, '%Y-%m-%d') AS vstdate
             ,ov.vsttime
@@ -100,12 +102,26 @@ module.exports = {
         FROM lab_head as lh 
         WHERE lh.vn = ?
         `;
+
+        let labResult = [];
         return new Promise((resolve, reject)=>{
             connection.query(sql,[vn],(error, results)=>{
                 if (error) {
                     console.error('Error executing lab order query:', error);
                     return reject(error);
                 }
+                
+                let lab_result = results;
+                results.forEach(element => {
+                    const lab = this.onFindLabOrder(element.lab_order_number);
+                    lab_result.map((item)=>{
+                        return {...item,
+                            lab_items: lab || []
+                        }
+                    })
+                });
+                 
+                console.log(lab_result);
                 resolve(results);
             });
         });
@@ -140,7 +156,7 @@ module.exports = {
         });
     },
 
-    onFindLabResult(value){
+   /* onFindLabResult(value){
         const sql = `
         SELECT li.lab_items_code, li.lab_items_name
         , IF(li.lab_items_code = '68' AND lo.lab_order_result = 'Positive', 'Secret level',  lo.lab_order_result) as lab_order_result
@@ -160,7 +176,7 @@ module.exports = {
                 resolve(results);
             });
         });
-    },
+    },*/
     onFindAll(){
         return new Promise((resolve, reject)=>{
             connection.query(` `,(error, result)=>{

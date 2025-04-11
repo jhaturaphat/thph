@@ -51,7 +51,7 @@ export class LabHistoryComponent implements OnInit {
       // console.log(result);   
       if(!result.length) return this.alert.openSnackBarEnd('ไม่พบข้อมูลที่ค้นหา');  
       this.DataVisitList = result;
-      this.fullname = "HN: " + result[0].hn + " ชื่อ-สกุล " + result[0].fullname;
+      this.fullname = "HN: " + result[0].hn + " ชื่อ-สกุล " + result[0].fullname + " เพศ "+result[0].sex+" อายุ "+result[0].age_y+" ปี";
     })
     .catch(err => console.log(err))
     .finally(()=>{
@@ -65,8 +65,13 @@ export class LabHistoryComponent implements OnInit {
     this.selectedIndex = index;
     this.labService.findLabHead(item).then((result) => {      
       this.dataLabHead = result;
+      console.log(result.length);
+      
+      if(result.length <= 0) this.alert.openSnackBar("ไม่มีรายการตรวจ");
     }).catch(err => { console.log(err) })
-      .finally();
+      .finally(()=>{
+        
+      });
   }
 
   onTabChanged(event: MatTabChangeEvent) {
@@ -74,7 +79,7 @@ export class LabHistoryComponent implements OnInit {
     // ตรวจสอบว่า index อยู่ในช่วงของ array หรือไม่
     if (event.index >= 0 && event.index < this.dataLabHead.length) {
       const selectedItem = this.dataLabHead[event.index];
-      console.log('Lab Order Number:', selectedItem.lab_order_number);
+      // console.log('Lab Order Number:', selectedItem.lab_order_number);
       this.fetchDataLabOrder(selectedItem.lab_order_number);
     }   
   }
