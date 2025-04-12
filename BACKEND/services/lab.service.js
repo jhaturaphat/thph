@@ -87,7 +87,7 @@ module.exports = {
         });
     },
 
-    onFindLabHead(vn){
+    async  onFindLabHead(vn){
         if(!vn) return Promise.reject(new Error('VN:Parameter is required'));
 
         sql = `
@@ -103,26 +103,53 @@ module.exports = {
         WHERE lh.vn = ?
         `;
 
-        let labResult = [];
-        return new Promise((resolve, reject)=>{
-            connection.query(sql,[vn],(error, results)=>{
-                if (error) {
-                    console.error('Error executing lab order query:', error);
-                    return reject(error);
-                }
-                
-                let lab_result = results;
-                results.forEach(element => {
-                    const lab = this.onFindLabOrder(element.lab_order_number);
-                    lab_result.map((item)=>{
-                        return {...item,
-                            lab_items: lab || []
-                        }
-                    })
+        try {
+            // ดึงข้อมูล lab_head
+            const results = await new Promise((resolve, reject) => {
+                connection.query(sql, [vn], (error, results) => {
+                    if (error) reject(error);
+                    else resolve(results);
                 });
-                 
-                console.log(lab_result);
-                resolve(results);
+            });
+    
+            // ดึง lab_items สำหรับแต่ละ lab_order_number พร้อมกัน
+            const labItemsPromises = results.map(ele => 
+                module.exports.onFindLabitem(ele.lab_order_number)
+            );
+            console.log(labItemsPromises);
+            
+            const labItemsResults = await Promise.all(labItemsPromises);
+    
+            // รวมข้อมูล
+            const labResult = results.map((item, index) => ({
+                ...item,
+                lab_items: labItemsResults[index] || []
+            }));
+            // console.log(labResult);
+            
+            return labResult;
+        } catch (error) {
+            console.error('Error in onFindLabHead:', error);
+            throw error;
+        }
+        
+    },
+
+    onFindLabitem(labOrderNumber) {
+        return new Promise((resolve, reject) => {
+            const sql = `            
+            SELECT  
+             lo.lab_order_number
+            ,lo.lab_items_name_ref
+            ,IF(lo.lab_items_code = '68' AND lo.lab_order_result = 'Positive', 'Secret level',  lo.lab_order_result) as lab_order_result
+            ,lo.lab_items_normal_value_ref
+            ,lo.abnormal_result
+            ,lo.confirm
+            FROM lab_order as lo WHERE lo.lab_order_number = ?;
+            `;
+            connection.query(sql, [labOrderNumber], (error, results) => {
+                if (error) reject(error);
+                else resolve(results);
             });
         });
     },
