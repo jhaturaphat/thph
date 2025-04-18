@@ -43,13 +43,18 @@ mat-grid-tile {
     background-color: aqua;
     padding: 2px;
   }  
+  .layout-left{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
   .item-left{
     /* background-color: antiquewhite; */
     width: 230px;
-    height: 80vh;
-    overflow: scroll;
-    margin-top: 50px;
-  }
+    height: 80vh;    
+    margin-top: 10px;
+    overflow-y: scroll;
+  }  
   .item-content{
     /* background-color: aqua; */
     width: 100%;

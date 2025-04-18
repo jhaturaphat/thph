@@ -74,8 +74,9 @@ export class LabHistoryComponent implements OnInit {
       });
   }
 
+  //เมื่อคลิกเปลี่ยน Tabs
   onTabChanged(event: MatTabChangeEvent) {
-    console.log(event);
+    // console.log(event);
     // ตรวจสอบว่า index อยู่ในช่วงของ array หรือไม่
     if (event.index >= 0 && event.index < this.dataLabHead.length) {
       const selectedItem = this.dataLabHead[event.index];
@@ -84,13 +85,14 @@ export class LabHistoryComponent implements OnInit {
     }   
   }
 
-  fetchDataLabOrder(id:string): void{
-    this.labService.findLabOrder(id)
-    .then((result)=>{
-      this.labOrders = result;
-    })
-    .catch()
-    .finally()
+  fetchDataLabOrder(id:string): void{    
+    
+    // this.labService.findLabOrder(id)
+    // .then((result)=>{
+    //   this.labOrders = result;
+    // })
+    // .catch()
+    // .finally()
   }
 
   // ตรวจสอบผลการตรวจว่าผิดปกติหรือไม่ 
