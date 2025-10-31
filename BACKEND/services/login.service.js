@@ -1,7 +1,7 @@
 require('dotenv').config();
 const jwt = require("jsonwebtoken");
 const connection = require('../configs/databases');
-const { notify } = require("../services/line.service")
+const { notify } = require("../services/alert.service")
 const crypto = require('crypto');
 
 module.exports = {
@@ -31,14 +31,15 @@ module.exports = {
         })
     },
     onLoginAttempts(value){               
-        return new Promise((resolve, reject) => {           
+        return new Promise((resolve, reject) => { 
+               
             connection.query("SELECT userid, pass, login_attempts, lock_until FROM tambonservice WHERE userid = ?", [ value['userid'] ], (error, result) => {
                 if(error) {
                     return reject(error);
                 }
                 
                 // ถ้าพบว่าไม่มี user นี้อยู่ในระบบ
-                if(result.length === 0) {
+                if(result.length === 0) {                    
                     return reject({message:"Username or password is invalid"});
                 }
     

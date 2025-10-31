@@ -55,15 +55,16 @@ module.exports = {
             condition = "pt.cid = ?";
         }else{      
             //ใส่่ 000000000 หน้า HN ให้ครบ 9 หลัก     
-            trem = hn.padStart(9, '0')
+            trem = hn.padStart(9, '0');
         }
+        // const patient = 
         return new Promise((resolve, reject) => {
             sql = `
             SELECT 
             CONCAT(pt.pname, pt.fname, ' ', pt.lname) as fullname
             ,IF(pt.sex = '1','ชาย','หญิง') as sex
             ,vn.age_y
-            ,pt.hn, vn.vn
+            ,pt.hn ,vn.vn
             ,DATE_FORMAT(vn.vstdate, '%Y-%m-%d') AS vstdate
             ,ov.vsttime
             ,IF(lh.lab_order_number != "",'Y','N') as 'status'
