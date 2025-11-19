@@ -25,8 +25,9 @@ module.exports = {
             ,ops.bmi as 'bmi',ops.bps as "SysBP", ops.bpd as "DiasBP"
             #,ops.cc, ops.hpi
             ,DATE_FORMAT(h.order_date,'%Y-%m-%d') as order_date
-            #,k.department
-            #,w.name as 'WARD_NAME'
+            ,k.depcode
+            ,k.department
+            #,w.name as 'ward_name'
             ,DATE_FORMAT(h.receive_date,'%Y-%m-%d') as receive_date,h.receive_time
             ,DATE_FORMAT(h.report_date,'%Y-%m-%d') as report_date,h.report_time
             ,DATE_FORMAT(h.report_date,'%Y-%m-%d') as 'approve_date'

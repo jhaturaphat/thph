@@ -1,15 +1,19 @@
-  .mat-form-field {
-    width: 100%;
-  }
-  .example-form-fields {
-    display: flex;
-    align-items: flex-start;
-  }
-  .example-form-fields mat-form-field{
-    margin: 5px;
-  }
-  table tr{
-    border: 1px solid #D5D8DC;
-  }
-
-  
+.mat-form-field {
+  width: 100%;
+}
+.example-form-fields {
+  display: flex;
+  align-items: flex-start;
+}
+.example-form-fields mat-form-field {
+  margin: 5px;
+}
+table {
+  margin-bottom: 20px;
+}
+table tr {
+  border: 1px solid #d5d8dc;
+}
+table td {  
+  white-space: nowrap; /* ป้องกันไม่ให้ข้อความขึ้นบรรทัดใหม่ */  
+}

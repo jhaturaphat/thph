@@ -27,5 +27,6 @@ HDL: any;
     eGFR:Number,
     Tri:String,
     LDL:Number,
-    FBS:Number
+    FBS:Number,
+    department:String
 }
