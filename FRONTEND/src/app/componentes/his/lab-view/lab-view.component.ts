@@ -19,6 +19,8 @@ export class LabViewComponent implements OnInit {
   color = 'primary';
   myForm:FormGroup;  
   labResult:ILabview[] = [];
+  start_date = "";
+  end_date = "";
 
   constructor(
     private fb:FormBuilder, 
@@ -53,11 +55,11 @@ export class LabViewComponent implements OnInit {
     const start_d = new Date(this.myForm.value['lab_start_date'])//.toISOString().slice(0, 10);
     const end_d = new Date(this.myForm.value['lab_end_date'])//.toISOString().slice(0, 10);
 
-    const start_date = new Date(start_d.setDate(start_d.getDate() + 1)).toISOString().slice(0, 10);;
-    const end_date = new Date(end_d.setDate(end_d.getDate() + 1)).toISOString().slice(0, 10);
-    console.log("start_date ",start_date, "end_date ", end_date);  
+     this.start_date = new Date(start_d.setDate(start_d.getDate() + 1)).toISOString().slice(0, 10);;
+     this.end_date = new Date(end_d.setDate(end_d.getDate() + 1)).toISOString().slice(0, 10);
+    console.log("start_date ",this.start_date, "end_date ", this.end_date);  
     
-    await this.labService.find(start_date, end_date).then(res => {
+    await this.labService.find(this.start_date, this.end_date).then(res => {
       // this.loading = false;
       // this.progressMode = 'determinate';
       this.labResult = res;
@@ -88,9 +90,10 @@ export class LabViewComponent implements OnInit {
     /* generate workbook and add the worksheet */
     const wb: XLSX.WorkBook = XLSX.utils.book_new();
     XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
- 
+  
     /* save to file */  
-    XLSX.writeFile(wb, 'ExcelSheet.xlsx');
+    const date = new Date().toISOString().slice(0, 10); 
+    XLSX.writeFile(wb, `${this.start_date} ถึง ${this.end_date}.xlsx`);
   }
 
 }

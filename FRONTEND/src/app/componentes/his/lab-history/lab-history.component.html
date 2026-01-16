@@ -38,10 +38,17 @@
 
         <!-- Data List Tables -->
         <div class="item-content">
-
+          <h2>ผลตรวจทางห้องปฏิบัติการ </h2>
+          <div class="item-label-bar">            
+            {{fullname}}              
+            <mat-icon *ngIf="DataVisitList.length > 0" 
+              (click)="PrintPerview()"
+              color="accent" class="icon-32px">remove_red_eye
+            </mat-icon>
+              
+          </div>
+          <!-- #Taps group For LAB -->
           <div class="lab-results-container">
-            <h2>ผลตรวจทางห้องปฏิบัติการ {{fullname}}</h2>
-
             <mat-tab-group mat-stretch-tabs="false" mat-align-tabs="start" (selectedTabChange)="onTabChanged($event) ">
               <!-- #Tabs -->
               <mat-tab *ngFor="let item of dataLabHead; let i = index" label="{{item.form_name}}">

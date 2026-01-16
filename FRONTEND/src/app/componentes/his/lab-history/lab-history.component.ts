@@ -1,10 +1,12 @@
 import { Component, OnInit, HostListener } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 import { MatTabChangeEvent } from '@angular/material/tabs';
 import { Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
 import { HisLabService } from 'src/app/services/his.lab.service';
 import { AlertService } from 'src/app/shared/services/alert.service';
+import { LabPrintPreviewComponent } from '../lab-print-preview/lab-print-preview.component';
 
 @Component({
   selector: 'app-lab-history',
@@ -36,6 +38,7 @@ export class LabHistoryComponent implements OnInit {
     private labService: HisLabService,
     private alert: AlertService,
     private router: Router,
+    private dialog: MatDialog
   ) {
     this.Fsearch = this.fb.group({
       keyword: ['', Validators.required],
@@ -60,13 +63,13 @@ export class LabHistoryComponent implements OnInit {
     
   }
 
+  // เมื่อคลิกรายการวันที่มาด้ายซ้ายมือ
   LabHead(event: Event, item: string, index: number): void {
     event.preventDefault();    
     this.selectedIndex = index;
     this.labService.findLabHead(item).then((result) => {      
       this.dataLabHead = result;
-      console.log(result.length);
-      
+      // console.log(result.length);      
       if(result.length <= 0) this.alert.openSnackBar("ไม่มีรายการตรวจ");
     }).catch(err => { console.log(err) })
       .finally(()=>{
@@ -79,10 +82,23 @@ export class LabHistoryComponent implements OnInit {
     // console.log(event);
     // ตรวจสอบว่า index อยู่ในช่วงของ array หรือไม่
     if (event.index >= 0 && event.index < this.dataLabHead.length) {
-      const selectedItem = this.dataLabHead[event.index];
+      this.selectedIndex = event.index; // เก็บตัวแปร index ของ Tab ที่คลิก โดนเริ่ใต้นจาก 0 - ??
+      const selectedItem = this.dataLabHead[event.index]; //ดึงข้อมูลจาก dataLabHeader เก็บไว้ในตัวแปร
       // console.log('Lab Order Number:', selectedItem.lab_order_number);
-      this.fetchDataLabOrder(selectedItem.lab_order_number);
+      // this.fetchDataLabOrder(selectedItem.lab_order_number);
     }   
+  }
+
+  PrintPerview(): void{    
+    const dialogRef = this.dialog.open(LabPrintPreviewComponent, {
+      width: '21cm',
+      height: '29.7cm',
+      data:{
+        info: this.dataLabHead,
+        labitems: this.dataLabHead
+      }
+    })
+    
   }
 
   fetchDataLabOrder(id:string): void{    
@@ -121,7 +137,7 @@ export class LabHistoryComponent implements OnInit {
 
   // ทำงานเมื่อผู้ใช้กดปุ่ม Esc 
   @HostListener('document:keydown.enter', ['$event'])
-  handleEnter(event: KeyboardEvent): void {
+  handleEnter(event: Event): void {    
     if (this.Fsearch.valid) {      
       event.preventDefault(); // ป้องกันการ submit form หากไม่ต้องการ
       this.VisitList(event);

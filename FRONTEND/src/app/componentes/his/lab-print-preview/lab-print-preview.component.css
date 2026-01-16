@@ -1,0 +1,22 @@
+/* ซ่อน component นี้ในหน้าจอปกติ */
+/* :host {
+    display: none;
+  }
+  
+  //แสดงเฉพาะตอนสั่ง print 
+  @media print {
+    :host {
+      display: block;
+      position: absolute;
+      top: 0; left: 0; width: 100%;
+    }
+    .print-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    .print-table th, .print-table td {
+      border: 1px solid #ddd;
+      padding: 8px;
+      text-align: left;
+    }
+  } */
