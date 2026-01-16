@@ -8,6 +8,7 @@ import { SideBarHisComponent } from "../layout-his/side-bar-his/side-bar-his.com
 import { LabViewComponent } from "src/app/componentes/his/lab-view/lab-view.component";
 import { LabHistoryComponent } from "src/app/componentes/his/lab-history/lab-history.component";
 import { LabPrintPreviewComponent } from "src/app/componentes/his/lab-print-preview/lab-print-preview.component";
+import { CdkTableModule } from "@angular/cdk/table";
 
 
 @NgModule({
@@ -24,8 +25,9 @@ import { LabPrintPreviewComponent } from "src/app/componentes/his/lab-print-prev
   imports: [
     CommonModule,
     SharedModule,
-    HisRoutingModule
-  ],
+    HisRoutingModule,
+    CdkTableModule
+],
   exports: [
     // SharedModule,
     //HIS Layout

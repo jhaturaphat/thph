@@ -13,9 +13,44 @@ export class LabPrintPreviewComponent implements OnInit {
     private dialogRef: MatDialogRef<LabPrintPreviewComponent>  //ใช้สำหรับสั่งปิด Dialog
   ) { }
 
+  displayedColumns: string[] = [
+    'lab_items_name_ref',
+    'lab_order_result',
+    'lab_items_normal_value_ref'
+  ];
+
   ngOnInit(): void {
     console.log('ข้อมูลที่รับมา:', this.data);
   }
+  print() {
+    const printContents = document.getElementById('print-section')?.innerHTML;
+    const popupWin = window.open('', '_blank', 'width=800,height=600');
+    popupWin!.document.open();
+    popupWin!.document.write(`
+      <html>
+        <head>
+          <title>Laboratory Report</title>
+          <style>
+            @page { size: A4; margin: 20mm; }
+            body { font-family: 'Sarabun', sans-serif; }
+            .result-section { page-break-before: always; }
+          </style>
+        </head>
+        <body onload="window.print();window.close()">
+          ${printContents}
+        </body>
+      </html>
+    `);
+    popupWin!.document.close();
+  }
+  
 
+   // ตรวจสอบผลการตรวจว่าผิดปกติหรือไม่ 
+   isAbnormalResult(item: any): boolean {   
+   if(item.abnormal_result === "Y"){
+    return true;
+   }
+    return false;
+  }
 
 }

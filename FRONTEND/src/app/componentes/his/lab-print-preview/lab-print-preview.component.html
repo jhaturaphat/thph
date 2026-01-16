@@ -1,18 +1,64 @@
 <div class="print-wrapper">
-    <h2 mat-dialog-title>ตัวอย่างการพิมพ์</h2>
-    
-    <mat-dialog-content>
-      <h3>ข้อมูลผู้ป่วย: </h3>
-      
-      <table>
-        <tr *ngFor="let item of data.labitems">
-           <td></td> 
-        </tr>
-      </table>
+    <div mat-dialog-title class="no-print preview-toolbar">
+      <mat-icon>visibility</mat-icon> ตัวอย่างก่อนพิมพ์ (A4 Standard)
+    </div>
+  
+    <mat-dialog-content class="print-content">
+      <div class="report-header">
+        <div class="hospital-info">
+          <h1 class="hospital-name">โรงพยาบาลสมเด็จพระยุพราชเดชอุดม</h1>
+          <p class="hospital-sub">Crown Prince Hospital Det Udon</p>
+          <p class="report-title">LABORATORY REPORT</p>
+        </div>
+        
+        <div class="patient-card">
+          <table class="info-table">
+            <tr>
+              <td><strong>ชื่อ-นามสกุล (Name):</strong> {{ data.fullname }}</td>
+              <td><strong>วันที่ตรวจ (Date):</strong> {{ data.visitDate | thaiDate }}</td>
+            </tr>
+            <tr>
+              <td><strong>HN:</strong> {{ data.hn }}</td>
+              <td><strong>แบบฟอร์ม:</strong> {{ data.formName }}</td>
+            </tr>
+          </table>
+        </div>
+      </div>
+  
+      <div class="result-section" *ngFor="let group of data.labitems">
+        <div class="group-header">{{ group.form_name }}</div>
+        <table class="lab-table">
+          <thead>
+            <tr>
+              <th class="text-left">การตรวจ (Test)</th>
+              <th class="text-center">ผลตรวจ (Result)</th>
+              <th class="text-center">ค่าปกติ (Reference Range)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of group.lab_items">
+              <td class="test-name">{{ item.lab_items_name_ref }}</td>
+              <td class="test-result text-center" [class.abnormal]="isAbnormalResult(item)">
+                {{ item.lab_order_result || '-' }}
+              </td>
+              <td class="test-ref text-center">{{ item.lab_items_normal_value_ref || '-' }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+  
+      <div class="report-footer">
+        <div class="signature-box">
+          <div class="line"></div>
+          <p>ผู้รายงานผล (Reported by)</p>
+        </div>
+      </div>
     </mat-dialog-content>
   
     <mat-dialog-actions align="end" class="no-print">
-      <button mat-button mat-dialog-close>ปิด</button>
-      <button mat-raised-button color="primary" >พิมพ์</button>
+      <button mat-button mat-dialog-close>ยกเลิก</button>
+      <button mat-raised-button color="primary" (click)="print()">
+        <mat-icon>print</mat-icon> พิมพ์เอกสาร
+      </button>
     </mat-dialog-actions>
   </div>

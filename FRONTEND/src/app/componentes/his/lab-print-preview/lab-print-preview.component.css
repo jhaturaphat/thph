@@ -1,22 +1,22 @@
-/* ซ่อน component นี้ในหน้าจอปกติ */
-/* :host {
-    display: none;
+@media print {
+  .no-print { display: none !important; }
+
+  mat-dialog-content {
+    overflow: visible !important;
+    height: auto !important;
+    max-height: none !important;
   }
-  
-  //แสดงเฉพาะตอนสั่ง print 
-  @media print {
-    :host {
-      display: block;
-      position: absolute;
-      top: 0; left: 0; width: 100%;
-    }
-    .print-table {
-      width: 100%;
-      border-collapse: collapse;
-    }
-    .print-table th, .print-table td {
-      border: 1px solid #ddd;
-      padding: 8px;
-      text-align: left;
-    }
-  } */
+
+  .print-wrapper {
+    width: 210mm;   /* ความกว้าง A4 */
+    min-height: 297mm; /* ความสูง A4 */
+    margin: auto;
+    background: #fff;
+  }
+
+  /* บังคับให้แต่ละ group ขึ้นหน้าใหม่ */
+  .result-section {
+    page-break-before: always;   /* สำหรับ browser เก่า */
+    break-before: page;          /* สำหรับ browser ใหม่ */
+  }
+}
