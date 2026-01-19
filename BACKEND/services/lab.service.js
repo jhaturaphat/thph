@@ -139,20 +139,39 @@ module.exports = {
     onFindLabitem(labOrderNumber) {
         return new Promise((resolve, reject) => {
             const sql = `            
-            SELECT  
-             lo.lab_order_number
-            ,lo.lab_items_name_ref
-            ,IF(lo.lab_items_code = '68' AND lo.lab_order_result = 'Positive', 'Secret level',  lo.lab_order_result) as lab_order_result
-            ,lo.lab_items_normal_value_ref
-            ,lo.abnormal_result
-            ,lo.confirm
-            FROM lab_order as lo WHERE lo.lab_order_number = ?;
+                SELECT  
+                  lo.lab_order_number
+                , lo.lab_items_code 
+                , lo.lab_items_name_ref
+                , lo.lab_order_result
+                , lo.lab_items_normal_value_ref
+                , lo.abnormal_result
+                , lo.confirm
+                FROM lab_order as lo WHERE lo.lab_order_number = ?;
             `;
             connection.query(sql, [labOrderNumber], (error, results) => {
-                if (error) reject(error);
-                else resolve(results);
+                if (error) {
+                    reject(error);
+                } else {                    
+                    const processedResults = results.map(row => {
+                        return {
+                            ...row,
+                            lab_order_result: this.transformLabResult(row)
+                        };
+                    });
+                    resolve(processedResults);
+                }
             });
         });
+    },
+
+    transformLabResult(row) {
+        const { lab_items_code, lab_order_result } = row;    
+        // เงื่อนไขเดิม: ถ้า code 68 และเป็น Positive ให้ปิดความลับ
+        if (lab_items_code === '68' && lab_order_result === 'Positive') {
+            return 'Secret level';
+        }         
+        return lab_order_result;
     },
 
     onFindLabOrder(oid){

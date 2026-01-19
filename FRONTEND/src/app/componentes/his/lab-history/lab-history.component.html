@@ -26,7 +26,7 @@
           <div class="item-left">
             <mat-list role="list">
               <mat-list-item *ngFor="let item of DataVisitList; let i = index" role="listitem"
-                (click)="LabHead($event,item.vn, i )" [class.ActiveList]="selectedIndex === i">
+                (click)="LabHead($event, item, i )" [class.ActiveList]="selectedIndex === i">
                 {{item.vstdate | thaiDate:'short'}} &nbsp;<small>{{item.vsttime}}</small>
                 <mat-icon *ngIf="item.status === 'Y'" color="accent" matListItemIcon>science</mat-icon>
                 <mat-divider></mat-divider>
@@ -34,7 +34,6 @@
             </mat-list>
           </div>
         </div>
-
 
         <!-- Data List Tables -->
         <div class="item-content">

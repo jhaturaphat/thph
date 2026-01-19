@@ -18,6 +18,7 @@ export class LabHistoryComponent implements OnInit {
 
 
   selectedIndex: number = -1;
+  selectedTapIndex: number = -1;
   Fsearch: FormGroup;
   fullname = "";
   keyword = "";
@@ -26,6 +27,7 @@ export class LabHistoryComponent implements OnInit {
   // selectedIndex: number | null = null;
   dataLabHead: any[] = []; // ข้อมูลที่จะแสดงในตาราง
   DataVisitList: any[] = [];
+  patientInfo: any = {};
   value = '';
   displayedColumns: string[] = [
     'lab_items_name_ref',
@@ -57,19 +59,19 @@ export class LabHistoryComponent implements OnInit {
       this.fullname = "HN: " + result[0].hn + " ชื่อ-สกุล " + result[0].fullname + " เพศ "+result[0].sex+" อายุ "+result[0].age_y+" ปี";
     })
     .catch(err => console.log(err))
-    .finally(()=>{
-      
-    })
+    .finally(()=>{ })
     
   }
 
   // เมื่อคลิกรายการวันที่มาด้ายซ้ายมือ
-  LabHead(event: Event, item: string, index: number): void {
+  LabHead(event: Event, item: any, index: number): void {
     event.preventDefault();    
     this.selectedIndex = index;
-    this.labService.findLabHead(item).then((result) => {      
+    // console.log(item);
+    this.patientInfo = item;  //เก็บค่ารายการ visit list ที่คลิกเลือก    
+    this.labService.findLabHead(item.vn).then((result) => {      
       this.dataLabHead = result;
-      // console.log(result.length);      
+           
       if(result.length <= 0) this.alert.openSnackBar("ไม่มีรายการตรวจ");
     }).catch(err => { console.log(err) })
       .finally(()=>{
@@ -82,10 +84,10 @@ export class LabHistoryComponent implements OnInit {
     // console.log(event);
     // ตรวจสอบว่า index อยู่ในช่วงของ array หรือไม่
     if (event.index >= 0 && event.index < this.dataLabHead.length) {
-      this.selectedIndex = event.index; // เก็บตัวแปร index ของ Tab ที่คลิก โดนเริ่ใต้นจาก 0 - ??
+      this.selectedTapIndex = event.index; // เก็บตัวแปร index ของ Tab ที่คลิก โดนเริ่ใต้นจาก 0 - ??
       const selectedItem = this.dataLabHead[event.index]; //ดึงข้อมูลจาก dataLabHeader เก็บไว้ในตัวแปร
       // console.log('Lab Order Number:', selectedItem.lab_order_number);
-      // this.fetchDataLabOrder(selectedItem.lab_order_number);
+      this.fetchDataLabOrder(selectedItem.lab_order_number);
     }   
   }
 
@@ -94,7 +96,7 @@ export class LabHistoryComponent implements OnInit {
       width: '21cm',
       height: '29.7cm',
       data:{
-        info: this.dataLabHead,
+        info: this.patientInfo,
         labitems: this.dataLabHead
       }
     })

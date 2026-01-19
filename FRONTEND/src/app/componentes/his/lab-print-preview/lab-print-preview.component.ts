@@ -24,6 +24,7 @@ export class LabPrintPreviewComponent implements OnInit {
   }
   print() {
     const printContents = document.getElementById('print-section')?.innerHTML;
+    console.log(printContents);
     const popupWin = window.open('', '_blank', 'width=800,height=600');
     popupWin!.document.open();
     popupWin!.document.write(`
@@ -31,9 +32,12 @@ export class LabPrintPreviewComponent implements OnInit {
         <head>
           <title>Laboratory Report</title>
           <style>
-            @page { size: A4; margin: 20mm; }
+            * {margin:0; padding:0;}
+            @page { size: A4; margin: 15mm 20mm 10mm 20mm; }
             body { font-family: 'Sarabun', sans-serif; }
-            .result-section { page-break-before: always; }
+            .group-header { font-size: 20px } .group-header > span { font-size: 10px }
+            tbody { font-size: 10px }
+            /*.result-section { page-break-before: always; break-before: page;}*/
           </style>
         </head>
         <body onload="window.print();window.close()">

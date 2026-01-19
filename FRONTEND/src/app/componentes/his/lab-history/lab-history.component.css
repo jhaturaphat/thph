@@ -71,6 +71,9 @@ mat-grid-tile {
     margin-left: 5px;    
     overflow: scroll;
   }
+  .ActiveList{
+    background-color: #3f51b5;
+  }
   table {
     width: 100%;
   }

@@ -1,9 +1,10 @@
-<div class="print-wrapper">
+<div class="print-wrapper" id="print-content">
     <div mat-dialog-title class="no-print preview-toolbar">
       <mat-icon>visibility</mat-icon> ตัวอย่างก่อนพิมพ์ (A4 Standard)
     </div>
   
-    <mat-dialog-content class="print-content">
+    <mat-dialog-content class="print-content" id="print-section">    
+
       <div class="report-header">
         <div class="hospital-info">
           <h1 class="hospital-name">โรงพยาบาลสมเด็จพระยุพราชเดชอุดม</h1>
@@ -14,25 +15,34 @@
         <div class="patient-card">
           <table class="info-table">
             <tr>
-              <td><strong>ชื่อ-นามสกุล (Name):</strong> {{ data.fullname }}</td>
-              <td><strong>วันที่ตรวจ (Date):</strong> {{ data.visitDate | thaiDate }}</td>
+              <td><strong>HN</strong> {{ data.info.hn }}</td>              
+              <td><strong>VN</strong> {{ data.info.vn }}</td>              
             </tr>
             <tr>
-              <td><strong>HN:</strong> {{ data.hn }}</td>
-              <td><strong>แบบฟอร์ม:</strong> {{ data.formName }}</td>
-            </tr>
+              <td><strong>ชื่อ-นามสกุล </strong> {{ data.info.fullname }}</td>
+              <td><strong>วันที่ตรวจ </strong> {{ data.info.vstdate | thaiDate }}</td>
+            </tr>            
           </table>
         </div>
       </div>
   
-      <div class="result-section" *ngFor="let group of data.labitems">
-        <div class="group-header">{{ group.form_name }}</div>
+      <div class="result-section" *ngFor="let group of data.labitems">        
+        <div class="group-header">
+          {{ group.form_name }} 
+          <span>
+            order: {{group.order_date || '-'}} | 
+            receive: {{group.receive_date || '-'}} | 
+            report: {{group.report_date || '-'}}
+          </span>
+          
+        </div>
+        <hr>
         <table class="lab-table">
           <thead>
             <tr>
-              <th class="text-left">การตรวจ (Test)</th>
-              <th class="text-center">ผลตรวจ (Result)</th>
-              <th class="text-center">ค่าปกติ (Reference Range)</th>
+              <th class="text-left">การตรวจ </th>
+              <th class="text-center">ผลตรวจ </th>
+              <th class="text-center">ค่าปกติ </th>
             </tr>
           </thead>
           <tbody>
@@ -53,6 +63,7 @@
           <p>ผู้รายงานผล (Reported by)</p>
         </div>
       </div>
+    
     </mat-dialog-content>
   
     <mat-dialog-actions align="end" class="no-print">

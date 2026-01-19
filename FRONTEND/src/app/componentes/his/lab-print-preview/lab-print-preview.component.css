@@ -1,5 +1,7 @@
 @media print {
-  .no-print { display: none !important; }
+  .no-print {
+    display: none !important;
+  }
 
   mat-dialog-content {
     overflow: visible !important;
@@ -8,15 +10,15 @@
   }
 
   .print-wrapper {
-    width: 210mm;   /* ความกว้าง A4 */
+    width: 210mm; /* ความกว้าง A4 */
     min-height: 297mm; /* ความสูง A4 */
-    margin: auto;
+    margin: auto;    
     background: #fff;
   }
 
   /* บังคับให้แต่ละ group ขึ้นหน้าใหม่ */
   .result-section {
-    page-break-before: always;   /* สำหรับ browser เก่า */
-    break-before: page;          /* สำหรับ browser ใหม่ */
+    page-break-before: always; /* สำหรับ browser เก่า */
+    break-before: page; /* สำหรับ browser ใหม่ */
   }
 }
