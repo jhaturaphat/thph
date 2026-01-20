@@ -24,8 +24,10 @@ export class LabPrintPreviewComponent implements OnInit {
   }
   print() {
     const printContents = document.getElementById('print-section')?.innerHTML;
-    console.log(printContents);
-    const popupWin = window.open('', '_blank', 'width=800,height=600');
+    // console.log(printContents);
+    const width = window.screen.availWidth;
+    const height = window.screen.availHeight;
+    const popupWin = window.open('', '_blank', `width=${width},height=${height},left=0,top=0`);
     popupWin!.document.open();
     popupWin!.document.write(`
       <html>

@@ -170,6 +170,9 @@ module.exports = {
         // เงื่อนไขเดิม: ถ้า code 68 และเป็น Positive ให้ปิดความลับ
         if (lab_items_code === '68' && lab_order_result === 'Positive') {
             return 'Secret level';
+        }  
+        if (lab_items_code === '206' && lab_order_result === 'Positive') {
+            return 'Secret level';
         }         
         return lab_order_result;
     },
