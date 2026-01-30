@@ -1,6 +1,6 @@
 require('dotenv').config();
 const jwt = require("jsonwebtoken");
-const connection = require('../configs/databases');
+const {connection} = require('../configs/databases');
 const { notify } = require("../services/alert.service")
 const crypto = require('crypto');
 

@@ -1,4 +1,4 @@
-const connection = require('../configs/databases');
+const {connection} = require('../configs/databases');
 const { splitDateRange, fetchData } = require('../services/fn/lab.query');
 
 module.exports = {
@@ -205,28 +205,7 @@ module.exports = {
             });
         });
     },
-
-   /* onFindLabResult(value){
-        const sql = `
-        SELECT li.lab_items_code, li.lab_items_name
-        , IF(li.lab_items_code = '68' AND lo.lab_order_result = 'Positive', 'Secret level',  lo.lab_order_result) as lab_order_result
-        , li.lab_items_unit, li.lab_items_normal_value, li.lab_items_group, lig.lab_items_group_name FROM lab_order as lo
-        INNER JOIN lab_items as li ON lo.lab_items_code = li.lab_items_code
-        INNER JOIN lab_items_group lig ON li.lab_items_group = lig.lab_items_group_code
-        WHERE lo.lab_order_number = ? 
-        ORDER BY lig.lab_items_group_name ASC , li.lab_items_name ASC
-        LIMIT 200
-        `;
-        return new Promise((resolve, reject)=>{
-            connection.query(sql,[value],(error, results)=>{
-                if (error) {
-                    console.error('Error executing lab order query:', error);
-                    return reject(error);
-                }
-                resolve(results);
-            });
-        });
-    },*/
+    
     onFindAll(){
         return new Promise((resolve, reject)=>{
             connection.query(` `,(error, result)=>{

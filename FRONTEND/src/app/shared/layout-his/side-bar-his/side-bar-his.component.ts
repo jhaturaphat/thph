@@ -8,6 +8,8 @@ import { LoginService } from 'src/app/services/login.service';
 })
 export class SideBarHisComponent implements OnInit {
 
+  userProfile: any; // ตัวแปรสำหรับเก็บข้อมูล Profile
+
   @Output() sideNavClosed = new EventEmitter();
   constructor(
     private router: Router,
@@ -15,6 +17,7 @@ export class SideBarHisComponent implements OnInit {
     ) {}
 
   ngOnInit(): void {
+    this.userProfile = this.login.getProfile();
   }
 
   onAbout() {

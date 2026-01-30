@@ -1,6 +1,24 @@
 version: '3.8'
 
 services:
+  mysql:
+    image: mysql:5.7
+    container_name: thph-mysql
+    # restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: thph
+      MYSQL_USER: thph
+      MYSQL_PASSWORD: thph@11443
+      TZ: Asia/Bangkok
+    ports:
+      - "3333:3306"   # ถ้าไม่อยาก expose ออกนอกเครื่อง ลบออกได้
+    volumes:
+      - mysql_thph:/var/lib/mysql
+    command:
+      --character-set-server=utf8
+      --collation-server=utf8_general_ci
+      
   backend:
     build:
       context: ./BACKEND
@@ -10,17 +28,22 @@ services:
       - "3000:3000"
     environment:
       NODE_ENV: production
-    restart: always
+    depends_on:
+      - mysql
+    # restart: always
 
   frontend:
-      build:
-        context: ./FRONTEND
-        dockerfile: Dockerfile
-      container_name: thph-frontend
-      ports:
-        - "4201:80"
-      depends_on:
-        - backend
-      environment:
-        NODE_ENV: production
-      restart: always
+    build:
+      context: ./FRONTEND
+      dockerfile: Dockerfile
+    container_name: thph-frontend
+    ports:
+      - "4201:80"
+    depends_on:
+      - backend
+    environment:
+      NODE_ENV: production
+    # restart: always
+
+volumes:
+  mysql_thph:

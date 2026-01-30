@@ -1,4 +1,4 @@
-const connection = require('../../configs/databases');
+const {connection} = require('../../configs/databases');
 
 module.exports = {
     // ฟังก์ชัน Query ข้อมูลในแต่ละช่วงเวลา
